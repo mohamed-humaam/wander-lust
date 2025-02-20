@@ -4,62 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\NavigationSetting;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class NavigationSettingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get the active navigation settings
+     * GET /navigation-settings
+     *
+     * @return JsonResponse
      */
-    public function index()
+    public function show(): JsonResponse
     {
-        //
+        $settings = NavigationSetting::getActive();
+        return response()->json($settings);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Update the navigation settings
+     * PUT/PATCH /navigation-settings
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function create()
+    public function update(Request $request): JsonResponse
     {
-        //
-    }
+        $validated = $request->validate([
+            'logo_path' => ['nullable', 'string', 'max:255'],
+            'search_enabled' => ['boolean'],
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $settings = NavigationSetting::getActive();
+        $settings->update($validated);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(NavigationSetting $navigationSetting)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(NavigationSetting $navigationSetting)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, NavigationSetting $navigationSetting)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(NavigationSetting $navigationSetting)
-    {
-        //
+        return response()->json($settings);
     }
 }

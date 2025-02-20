@@ -21,7 +21,7 @@ class NavigationSetting extends Model
 
     public static function getActive()
     {
-        return static::firsOrCreate([], [
+        return static::firstOrCreate([], [
             'search_enabled' => true
         ]);
     }
