@@ -13,12 +13,7 @@ return new class extends Migration
     {
         Schema::create('amenity_link_pivots', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('amenity_id')->nullable();
-            $table->ulid('category_id')->nullable();
-            $table->ulid('package_id')->nullable();
-            $table->ulid('location_id')->nullable();
-
-            $table->foreign('amenity_id')->references('id')->on('amenities')->onDelete('cascade');
+            $table->foreignUlid('amenity_id')->references('id')->on('amenities')->onDelete('cascade');
             $table->foreignUlid('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignUlid('package_id')->references('id')->on('packages')->onDelete('cascade');
             $table->foreignUlid('location_id')->references('id')->on('locations')->onDelete('cascade');

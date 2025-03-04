@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('amenities', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('name');
             $table->string('slug');
             $table->string('icon')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
