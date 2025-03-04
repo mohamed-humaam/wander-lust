@@ -15,7 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('name');
             $table->string('icon');
-            $table->longText('description')->nullable();
+            $table->json('description')->nullable();
             $table->foreignUlId('parent_id')->nullable()->references('id')->on('features')->onDelete('cascade');
             $table->timestamps();
         });
