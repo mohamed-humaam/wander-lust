@@ -12,23 +12,13 @@ class Package extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = [
-        'id',
-        'name',
-        'slug',
-        'images',
-        'gallery',
-        'location_id',
-        'description',
-        'price',
-    ];
+    protected $fillable = ['name', 'slug', 'images', 'gallery', 'category_id', 'location_id', 'description', 'price'];
+    protected $casts = ['images' => 'array', 'gallery' => 'array', 'description' => 'array'];
 
-    protected $casts = [
-        'images' => 'array',
-        'gallery' => 'array',
-        'description' => 'array',
-        'price' => 'decimal:2',
-    ];
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function location(): BelongsTo
     {
@@ -37,26 +27,21 @@ class Package extends Model
 
     public function amenities(): BelongsToMany
     {
-        return $this->belongsToMany(Amenity::class, 'amenity_link_pivots');
-    }
-
-    public function categories(): BelongsToMany
-    {
-        return $this->belongsToMany(Category::class, 'amenity_link_pivots');
+        return $this->belongsToMany(Amenity::class, 'amenity_pivots');
     }
 
     public function rooms(): BelongsToMany
     {
-        return $this->belongsToMany(Room::class, 'room_type_link_pivots');
+        return $this->belongsToMany(Room::class, 'room_pivots');
     }
 
     public function activities(): BelongsToMany
     {
-        return $this->belongsToMany(Activity::class, 'activity_link_pivots');
+        return $this->belongsToMany(Activity::class, 'activity_pivots');
     }
 
     public function features(): BelongsToMany
     {
-        return $this->belongsToMany(Feature::class, 'feature_link_pivots');
+        return $this->belongsToMany(Feature::class, 'feature_pivots');
     }
 }

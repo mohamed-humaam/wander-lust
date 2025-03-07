@@ -13,40 +13,21 @@ class Activity extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = [
-        'id',
-        'name',
-        'icon',
-        'description',
-        'parent_id',
-    ];
-
-    protected $casts = [
-        'description' => 'array',
-    ];
+    protected $fillable = ['name', 'icon', 'description', 'parent_id'];
+    protected $casts = ['description' => 'array'];
 
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->belongsTo(Activity::class, 'parent_id');
     }
 
     public function children(): HasMany
     {
-        return $this->hasMany(self::class, 'parent_id');
-    }
-
-    public function locations(): BelongsToMany
-    {
-        return $this->belongsToMany(Location::class, 'activity_link_pivots');
-    }
-
-    public function categories(): BelongsToMany
-    {
-        return $this->belongsToMany(Category::class, 'activity_link_pivots');
+        return $this->hasMany(Activity::class, 'parent_id');
     }
 
     public function packages(): BelongsToMany
     {
-        return $this->belongsToMany(Package::class, 'activity_link_pivots');
+        return $this->belongsToMany(Package::class, 'activity_pivots');
     }
 }
