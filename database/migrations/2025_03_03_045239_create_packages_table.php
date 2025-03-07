@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->json('images')->nullable();
             $table->json('gallery')->nullable();
+            $table->foreignUlid('category_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->foreignUlid('location_id')->references('id')->on('locations')->cascadeOnDelete();
             $table->json('description')->nullable();
             $table->decimal('price', 8, 2)->default(0);
