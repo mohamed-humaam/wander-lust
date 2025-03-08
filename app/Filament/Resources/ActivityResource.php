@@ -6,6 +6,7 @@ use App\Filament\Resources\ActivityResource\Pages;
 //use App\Filament\Resources\ActivityResource\RelationManagers;
 use App\Models\Activity;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -31,10 +32,10 @@ class ActivityResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('icon')
-                    ->maxLength(255),
-                RichEditor::make('description')
-                    ->json(),
+                FileUpload::make('icon')
+                    ->image()
+                    ->directory('/icons'),
+                RichEditor::make('description'),
                 Select::make('parent_id')
                     ->relationship('parent', 'name')
                     ->nullable(),
@@ -45,8 +46,7 @@ class ActivityResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('icon')
-                    ->circular(),
+                ImageColumn::make('icon'),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -58,6 +58,7 @@ class ActivityResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

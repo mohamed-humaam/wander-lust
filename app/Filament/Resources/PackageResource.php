@@ -44,26 +44,37 @@ class PackageResource extends Resource
                     ->directory('packages/gallery'),
                 Select::make('category_id')
                     ->relationship('category', 'name')
+                    ->preload()
+                    ->live()
                     ->required(),
                 Select::make('location_id')
                     ->relationship('location', 'name')
+                    ->preload()
+                    ->live()
                     ->required(),
-                RichEditor::make('description')
-                    ->json(),
+                RichEditor::make('description'),
                 TextInput::make('price')
                     ->numeric()
                     ->required(),
                 Select::make('amenities')
                     ->relationship('amenities', 'name')
+                    ->preload()
+                    ->live()
                     ->multiple(),
                 Select::make('rooms')
                     ->relationship('rooms', 'name')
+                    ->preload()
+                    ->live()
                     ->multiple(),
                 Select::make('activities')
                     ->relationship('activities', 'name')
+                    ->preload()
+                    ->live()
                     ->multiple(),
                 Select::make('features')
                     ->relationship('features', 'name')
+                    ->preload()
+                    ->live()
                     ->multiple(),
             ]);
     }
@@ -91,6 +102,7 @@ class PackageResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

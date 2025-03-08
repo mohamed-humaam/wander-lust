@@ -6,6 +6,7 @@ use App\Filament\Resources\FeatureResource\Pages;
 //use App\Filament\Resources\FeatureResource\RelationManagers;
 use App\Models\Feature;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -31,11 +32,10 @@ class FeatureResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('icon')
-                    ->required()
-                    ->maxLength(255),
-                RichEditor::make('description')
-                    ->json(),
+                FileUpload::make('icon')
+                    ->image()
+                    ->directory('/icons'),
+                RichEditor::make('description'),
                 Select::make('parent_id')
                     ->relationship('parent', 'name')
                     ->nullable(),
@@ -59,6 +59,7 @@ class FeatureResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

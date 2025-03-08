@@ -6,12 +6,14 @@ use App\Filament\Resources\RoomResource\Pages;
 //use App\Filament\Resources\RoomResource\RelationManagers;
 use App\Models\Room;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 //use Illuminate\Database\Eloquent\Builder;
@@ -30,10 +32,10 @@ class RoomResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('icon')
-                    ->maxLength(255),
-                RichEditor::make('description')
-                    ->json(),
+                FileUpload::make('icon')
+                    ->image()
+                    ->directory('/icons'),
+                RichEditor::make('description'),
                 Select::make('parent_id')
                     ->relationship('parent', 'name')
                     ->nullable(),
@@ -44,10 +46,10 @@ class RoomResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('icon'),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('icon'),
                 TextColumn::make('parent.name')
                     ->label('Parent Room'),
             ])
@@ -56,6 +58,7 @@ class RoomResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

@@ -39,8 +39,7 @@ class CategoryResource extends Resource
                     ->image()
                     ->multiple()
                     ->directory('categories/images'),
-                RichEditor::make('description')
-                    ->json(),
+                RichEditor::make('description'),
                 Select::make('parent_id')
                     ->relationship('parent', 'name')
                     ->nullable(),
@@ -68,6 +67,7 @@ class CategoryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

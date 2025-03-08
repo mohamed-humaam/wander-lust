@@ -7,6 +7,7 @@ use App\Filament\Resources\LocationResource\Pages;
 use App\Models\Location;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -42,12 +43,9 @@ class LocationResource extends Resource
                     ->image()
                     ->multiple()
                     ->directory('locations/gallery'),
-                Textarea::make('location')
-                    ->json(),
-                Textarea::make('description')
-                    ->json(),
-                Textarea::make('google_location')
-                    ->json(),
+                Textarea::make('location'),
+                RichEditor::make('description'),
+                Textarea::make('google_location'),
             ]);
     }
 
@@ -70,6 +68,7 @@ class LocationResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

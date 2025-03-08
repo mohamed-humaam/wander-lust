@@ -6,11 +6,14 @@ use App\Filament\Resources\AmenityResource\Pages;
 //use App\Filament\Resources\AmenityResource\RelationManagers;
 use App\Models\Amenity;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 //use Illuminate\Database\Eloquent\Builder;
 //use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -31,10 +34,10 @@ class AmenityResource extends Resource
                 TextInput::make('slug')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('icon')
-                    ->maxLength(255),
-                RichEditor::make('description')
-                    ->json(),
+                FileUpload::make('icon')
+                    ->image()
+                    ->directory('/icons'),
+                RichEditor::make('description'),
             ]);
     }
 
@@ -42,19 +45,20 @@ class AmenityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                ImageColumn::make('icon'),
+                TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('icon'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
