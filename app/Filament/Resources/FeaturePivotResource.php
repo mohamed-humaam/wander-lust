@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FeaturePivotResource\Pages;
+
 //use App\Filament\Resources\FeaturePivotResource\RelationManagers;
 use App\Models\FeaturePivot;
 use Filament\Forms;
@@ -12,11 +13,15 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+
 //use Illuminate\Database\Eloquent\Builder;
 //use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FeaturePivotResource extends Resource
 {
+    // comment out this to view the resource
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = FeaturePivot::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-link';

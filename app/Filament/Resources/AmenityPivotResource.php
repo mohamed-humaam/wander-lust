@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AmenityPivotResource\Pages;
+
 //use App\Filament\Resources\AmenityPivotResource\RelationManagers;
 use App\Models\AmenityPivot;
 use Filament\Forms;
@@ -12,11 +13,15 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+
 //use Illuminate\Database\Eloquent\Builder;
 //use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AmenityPivotResource extends Resource
 {
+    // comment out this to view the resource
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = AmenityPivot::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-link';
