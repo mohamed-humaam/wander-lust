@@ -13,8 +13,12 @@ class Room extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['name', 'icon', 'description', 'parent_id'];
-    protected $casts = ['description' => 'array'];
+    protected $fillable = ['name', 'icon', 'description', 'price', 'size', 'parent_id'];
+    protected $casts = [
+        'description' => 'array',
+        'size' => 'integer',
+        'price' => 'decimal:2',
+    ];
 
     public function parent(): BelongsTo
     {

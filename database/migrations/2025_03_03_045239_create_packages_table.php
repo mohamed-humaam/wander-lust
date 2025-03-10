@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignUlid('location_id')->references('id')->on('locations')->cascadeOnDelete();
             $table->json('description')->nullable();
             $table->decimal('price', 8, 2)->default(0);
+            $table->integer('duration')->nullable()->default(0);
             $table->timestamps();
         });
     }

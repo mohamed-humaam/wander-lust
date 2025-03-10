@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('icon')->nullable();
             $table->json('description')->nullable();
+            $table->decimal('price', 8, 2)->default(0);
+            $table->integer('capacity')->default(0);
             $table->foreignUlId('parent_id')->nullable()->references('id')->on('rooms')->onDelete('cascade');
             $table->timestamps();
         });
