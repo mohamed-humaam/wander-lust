@@ -25,9 +25,9 @@ class FeatureResource extends Resource
 
     protected static ?string $navigationLabel = 'Property Features';
 
-    protected static ?string $navigationGroup = 'Property Management';
+    protected static ?string $navigationParentItem = 'Travel Packages';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $recordTitleAttribute = 'name';
 

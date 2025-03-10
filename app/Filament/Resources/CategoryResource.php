@@ -27,7 +27,7 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationLabel = 'Travel Categories';
 
-    protected static ?string $navigationGroup = 'Content Management';
+    protected static ?string $navigationGroup = 'Variables';
 
     protected static ?int $navigationSort = 1;
 

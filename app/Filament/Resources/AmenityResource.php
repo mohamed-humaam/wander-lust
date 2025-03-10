@@ -26,9 +26,9 @@ class AmenityResource extends Resource
 
     protected static ?string $navigationLabel = 'Property Amenities';
 
-    protected static ?string $navigationGroup = 'Property Management';
+    protected static ?string $navigationParentItem = 'Travel Packages';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $recordTitleAttribute = 'name';
 

@@ -25,9 +25,9 @@ class ActivityResource extends Resource
 
     protected static ?string $navigationLabel = 'Travel Activities';
 
-    protected static ?string $navigationGroup = 'Travel Management';
+    protected static ?string $navigationParentItem = 'Travel Packages';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 7;
 
     public static function form(Forms\Form $form): Forms\Form
     {

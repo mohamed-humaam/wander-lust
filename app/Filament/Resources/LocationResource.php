@@ -24,8 +24,10 @@ class LocationResource extends Resource
 {
     protected static ?string $model = Location::class;
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
-    protected static ?string $navigationLabel = 'Destinations';
+    protected static ?string $navigationGroup = 'Variables';
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Forms\Form $form): Forms\Form
