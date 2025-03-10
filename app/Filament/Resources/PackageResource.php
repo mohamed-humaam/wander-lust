@@ -12,8 +12,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
