@@ -3,20 +3,32 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
+use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Support\Facades\Hash;
+use Filament\Notifications\Notification;
 
 class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 
-    protected function mutateFormDataBeforeSave(array $data): array
+    protected function getHeaderActions(): array
     {
-        if (!empty($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        } else {
-            unset($data['password']); // Keep old password if not updating
-        }
-        return $data;
+        return [
+            Actions\ViewAction::make(),
+            Actions\DeleteAction::make(),
+        ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
+    protected function getSavedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('User updated')
+            ->body('The user has been updated successfully.');
     }
 }

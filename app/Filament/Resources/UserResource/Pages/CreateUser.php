@@ -4,14 +4,22 @@ namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Notifications\Notification;
 
 class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
 
-    protected function mutateFormDataBeforeCreate(array $data): array
+    protected function getRedirectUrl(): string
     {
-        $data['password'] = bcrypt($data['password']);
-        return $data;
+        return $this->getResource()::getUrl('index');
+    }
+
+    protected function getCreatedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('User created')
+            ->body('The user has been created successfully.');
     }
 }
