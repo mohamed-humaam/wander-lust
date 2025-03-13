@@ -166,15 +166,6 @@ class UserResource extends Resource
                     ->copyMessage('Email address copied')
                     ->copyMessageDuration(1500),
 
-                Tables\Columns\IconColumn::make('email_verified_at')
-                    ->label('Verified')
-                    ->boolean()
-                    ->trueIcon('heroicon-o-check-badge')
-                    ->falseIcon('heroicon-o-x-mark')
-                    ->trueColor('success')
-                    ->falseColor('danger')
-                    ->sortable(),
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created')
                     ->dateTime('M d, Y')
