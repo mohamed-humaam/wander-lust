@@ -27,7 +27,7 @@ class RoomResource extends Resource
 {
     protected static ?string $model = Room::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-home';
+    protected static ?string $navigationIcon = 'heroicon-o-room';
 
     protected static ?int $navigationSort = 3;
     protected static ?string $navigationLabel = 'Accommodations';
