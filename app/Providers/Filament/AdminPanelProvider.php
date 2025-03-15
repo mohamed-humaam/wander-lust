@@ -58,7 +58,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->topNavigation('true')
+//            ->topNavigation('true')
             ->maxContentWidth('full');
     }
 }

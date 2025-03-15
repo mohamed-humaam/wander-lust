@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\FooterSettingController;
-use App\Http\Controllers\NavigationSettingController;
-use App\Http\Controllers\PageController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AmenityController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,22 +30,50 @@ Route::apiResource('users', UserController::class);
 Route::match(['head'], 'users/{user}', [UserController::class, 'head']);
 
 /**
- * Page API Endpoints
- * Base URL: {baseURL}/api/pages
+ * Location API Endpoints
+ * Base URL: {baseURL}/api/locations
  */
-Route::apiResource('pages', PageController::class);
-Route::get('pages/navigation/tree', [PageController::class, 'navigation']);
+Route::apiResource('locations', LocationController::class);
+Route::match(['head'], 'locations/{location}', [LocationController::class, 'head']);
 
 /**
- * Navigation Settings API Endpoints
- * Base URL: {baseURL}/api/navigation-settings
+ * Category API Endpoints
+ * Base URL: {baseURL}/api/categories
  */
-Route::get('navigation-settings', [NavigationSettingController::class, 'show']);
-Route::match(['put', 'patch'], 'navigation-settings', [NavigationSettingController::class, 'update']);
+Route::apiResource('categories', CategoryController::class);
+Route::match(['head'], 'categories/{category}', [CategoryController::class, 'head']);
 
 /**
- * Footer Settings API Endpoints
- * Base URL: {baseURL}/api/footer-settings
+ * Package API Endpoints
+ * Base URL: {baseURL}/api/packages
  */
-Route::get('footer-settings', [FooterSettingController::class, 'show']);
-Route::match(['put', 'patch'], 'footer-settings', [FooterSettingController::class, 'update']);
+Route::apiResource('packages', PackageController::class);
+Route::match(['head'], 'packages/{package}', [PackageController::class, 'head']);
+
+/**
+ * Amenity API Endpoints
+ * Base URL: {baseURL}/api/amenities
+ */
+Route::apiResource('amenities', AmenityController::class);
+Route::match(['head'], 'amenities/{amenity}', [AmenityController::class, 'head']);
+
+/**
+ * Room API Endpoints
+ * Base URL: {baseURL}/api/rooms
+ */
+Route::apiResource('rooms', RoomController::class);
+Route::match(['head'], 'rooms/{room}', [RoomController::class, 'head']);
+
+/**
+ * Activity API Endpoints
+ * Base URL: {baseURL}/api/activities
+ */
+Route::apiResource('activities', ActivityController::class);
+Route::match(['head'], 'activities/{activity}', [ActivityController::class, 'head']);
+
+/**
+ * Feature API Endpoints
+ * Base URL: {baseURL}/api/features
+ */
+Route::apiResource('features', FeatureController::class);
+Route::match(['head'], 'features/{feature}', [FeatureController::class, 'head']);

@@ -4,62 +4,117 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class PackageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of packages with optional filtering
+     * GET /packages
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
+        $packages = Package::query()
+            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%")
+                ->orWhere('slug', 'like', "%{$request->search}%"))
+            ->paginate($request->per_page ?? 15);
+
+        return response()->json($packages);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created package
+     * POST /packages
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255', 'unique:packages'],
+            'images' => ['nullable', 'json'],
+            'gallery' => ['nullable', 'json'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'location_id' => ['required', 'exists:locations,id'],
+            'description' => ['nullable', 'json'],
+            'price' => ['numeric'],
+            'duration' => ['nullable', 'integer'],
+        ]);
+
+        $package = Package::create($validated);
+
+        return response()->json($package, 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the specified package
+     * GET /packages/{package}
+     *
+     * @param Package $package
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function show(Package $package): JsonResponse
     {
-        //
+        return response()->json($package);
     }
 
     /**
-     * Display the specified resource.
+     * Update the specified package
+     * PUT/PATCH /packages/{package}
+     *
+     * @param Request $request
+     * @param Package $package
+     * @return JsonResponse
      */
-    public function show(Package $packages)
+    public function update(Request $request, Package $package): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => ['sometimes', 'string', 'max:255'],
+            'slug' => ['sometimes', 'string', 'max:255', 'unique:packages,slug,' . $package->id],
+            'images' => ['sometimes', 'nullable', 'json'],
+            'gallery' => ['sometimes', 'nullable', 'json'],
+            'category_id' => ['sometimes', 'exists:categories,id'],
+            'location_id' => ['sometimes', 'exists:locations,id'],
+            'description' => ['sometimes', 'nullable', 'json'],
+            'price' => ['sometimes', 'numeric'],
+            'duration' => ['sometimes', 'nullable', 'integer'],
+        ]);
+
+        $package->update($validated);
+
+        return response()->json($package);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Remove the specified package
+     * DELETE /packages/{package}
+     *
+     * @param Package $package
+     * @return JsonResponse
      */
-    public function edit(Package $packages)
+    public function destroy(Package $package): JsonResponse
     {
-        //
+        $package->delete();
+
+        return response()->json(null, 204);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Get package metadata without content
+     * HEAD /packages/{package}
+     *
+     * @param Package $package
+     * @return JsonResponse
      */
-    public function update(Request $request, Package $packages)
+    public function head(Package $package): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Package $packages)
-    {
-        //
+        return response()->json(null)
+            ->header('X-Package-Id', $package->id)
+            ->header('X-Created-At', $package->created_at->toISOString());
     }
 }

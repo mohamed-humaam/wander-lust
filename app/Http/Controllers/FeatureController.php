@@ -4,62 +4,106 @@ namespace App\Http\Controllers;
 
 use App\Models\Feature;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class FeatureController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of features with optional filtering
+     * GET /features
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
+        $features = Feature::query()
+            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%"))
+            ->paginate($request->per_page ?? 15);
+
+        return response()->json($features);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created feature
+     * POST /features
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'icon' => ['required', 'string'],
+            'description' => ['nullable', 'json'],
+            'parent_id' => ['nullable', 'exists:features,id'],
+        ]);
+
+        $feature = Feature::create($validated);
+
+        return response()->json($feature, 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the specified feature
+     * GET /features/{feature}
+     *
+     * @param Feature $feature
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function show(Feature $feature): JsonResponse
     {
-        //
+        return response()->json($feature);
     }
 
     /**
-     * Display the specified resource.
+     * Update the specified feature
+     * PUT/PATCH /features/{feature}
+     *
+     * @param Request $request
+     * @param Feature $feature
+     * @return JsonResponse
      */
-    public function show(Feature $feature)
+    public function update(Request $request, Feature $feature): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => ['sometimes', 'string', 'max:255'],
+            'icon' => ['sometimes', 'string'],
+            'description' => ['sometimes', 'nullable', 'json'],
+            'parent_id' => ['sometimes', 'nullable', 'exists:features,id'],
+        ]);
+
+        $feature->update($validated);
+
+        return response()->json($feature);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Remove the specified feature
+     * DELETE /features/{feature}
+     *
+     * @param Feature $feature
+     * @return JsonResponse
      */
-    public function edit(Feature $feature)
+    public function destroy(Feature $feature): JsonResponse
     {
-        //
+        $feature->delete();
+
+        return response()->json(null, 204);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Get feature metadata without content
+     * HEAD /features/{feature}
+     *
+     * @param Feature $feature
+     * @return JsonResponse
      */
-    public function update(Request $request, Feature $feature)
+    public function head(Feature $feature): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Feature $feature)
-    {
-        //
+        return response()->json(null)
+            ->header('X-Feature-Id', $feature->id)
+            ->header('X-Created-At', $feature->created_at->toISOString());
     }
 }

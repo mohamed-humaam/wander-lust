@@ -4,62 +4,110 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class RoomController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of rooms with optional filtering
+     * GET /rooms
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
+        $rooms = Room::query()
+            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%"))
+            ->paginate($request->per_page ?? 15);
+
+        return response()->json($rooms);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created room
+     * POST /rooms
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'icon' => ['nullable', 'string'],
+            'description' => ['nullable', 'json'],
+            'price' => ['numeric'],
+            'capacity' => ['integer'],
+            'parent_id' => ['nullable', 'exists:rooms,id'],
+        ]);
+
+        $room = Room::create($validated);
+
+        return response()->json($room, 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the specified room
+     * GET /rooms/{room}
+     *
+     * @param Room $room
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function show(Room $room): JsonResponse
     {
-        //
+        return response()->json($room);
     }
 
     /**
-     * Display the specified resource.
+     * Update the specified room
+     * PUT/PATCH /rooms/{room}
+     *
+     * @param Request $request
+     * @param Room $room
+     * @return JsonResponse
      */
-    public function show(Room $room)
+    public function update(Request $request, Room $room): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'name' => ['sometimes', 'string', 'max:255'],
+            'icon' => ['sometimes', 'nullable', 'string'],
+            'description' => ['sometimes', 'nullable', 'json'],
+            'price' => ['sometimes', 'numeric'],
+            'capacity' => ['sometimes', 'integer'],
+            'parent_id' => ['sometimes', 'nullable', 'exists:rooms,id'],
+        ]);
+
+        $room->update($validated);
+
+        return response()->json($room);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Remove the specified room
+     * DELETE /rooms/{room}
+     *
+     * @param Room $room
+     * @return JsonResponse
      */
-    public function edit(Room $room)
+    public function destroy(Room $room): JsonResponse
     {
-        //
+        $room->delete();
+
+        return response()->json(null, 204);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Get room metadata without content
+     * HEAD /rooms/{room}
+     *
+     * @param Room $room
+     * @return JsonResponse
      */
-    public function update(Request $request, Room $room)
+    public function head(Room $room): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Room $room)
-    {
-        //
+        return response()->json(null)
+            ->header('X-Room-Id', $room->id)
+            ->header('X-Created-At', $room->created_at->toISOString());
     }
 }
