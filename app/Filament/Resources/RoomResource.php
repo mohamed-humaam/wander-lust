@@ -27,7 +27,7 @@ class RoomResource extends Resource
 {
     protected static ?string $model = Room::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-key';
+    protected static ?string $navigationIcon = 'heroicon-o-room';
 
     protected static ?int $navigationSort = 3;
     protected static ?string $navigationLabel = 'Accommodations';
@@ -194,7 +194,7 @@ class RoomResource extends Resource
             ])
             ->emptyStateHeading('No Rooms Found')
             ->emptyStateDescription('Create your first room by clicking the button below.')
-            ->emptyStateIcon('heroicon-o-key');
+            ->emptyStateIcon('heroicon-o-room');
     }
 
     public static function getPages(): array
