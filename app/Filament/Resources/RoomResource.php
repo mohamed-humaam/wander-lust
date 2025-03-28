@@ -194,7 +194,7 @@ class RoomResource extends Resource
             ])
             ->emptyStateHeading('No Rooms Found')
             ->emptyStateDescription('Create your first room by clicking the button below.')
-            ->emptyStateIcon('heroicon-o-room');
+            ->emptyStateIcon('heroicon-o-home');
     }
 
     public static function getPages(): array
