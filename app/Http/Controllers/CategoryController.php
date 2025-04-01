@@ -15,15 +15,18 @@ class CategoryController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $categories = Category::query()
-            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%")
-                ->orWhere('slug', 'like', "%{$request->search}%"))
-            ->paginate($request->per_page ?? 15);
+        $categories = Category::all(); // Fetch all categories without filters
+
+        if ($categories->isEmpty()) {
+            return response()->json(['message' => 'No categories found'], 404);
+        }
 
         return response()->json($categories);
     }
+
+
 
     /**
      * Store a newly created category
