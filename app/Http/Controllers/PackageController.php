@@ -14,10 +14,15 @@ class PackageController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $packages = Package::all(); // Fetch all categories without filters
+        // Get the 'with' parameter from the request, allowing multiple relations
+        $relations = $request->query('with') ? explode(',', $request->query('with')) : [];
 
+        // Fetch packages with the requested relationships
+        $packages = Package::with($relations)->get();
+
+        // Check if no packages exist
         if ($packages->isEmpty()) {
             return response()->json(['message' => 'No packages found'], 404);
         }
