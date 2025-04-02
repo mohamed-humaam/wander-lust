@@ -12,14 +12,15 @@ class FeatureController extends Controller
      * Display a listing of features with optional filtering
      * GET /features
      *
-     * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $features = Feature::query()
-            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%"))
-            ->paginate($request->per_page ?? 15);
+        $features = Feature::all(); // Fetch all categories without filters
+
+        if ($features->isEmpty()) {
+            return response()->json(['message' => 'No features found'], 404);
+        }
 
         return response()->json($features);
     }

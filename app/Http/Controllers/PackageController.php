@@ -12,15 +12,15 @@ class PackageController extends Controller
      * Display a listing of packages with optional filtering
      * GET /packages
      *
-     * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $packages = Package::query()
-            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%")
-                ->orWhere('slug', 'like', "%{$request->search}%"))
-            ->paginate($request->per_page ?? 15);
+        $packages = Package::all(); // Fetch all categories without filters
+
+        if ($packages->isEmpty()) {
+            return response()->json(['message' => 'No packages found'], 404);
+        }
 
         return response()->json($packages);
     }

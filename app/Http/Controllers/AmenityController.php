@@ -12,15 +12,15 @@ class AmenityController extends Controller
      * Display a listing of amenities with optional filtering
      * GET /amenities
      *
-     * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $amenities = Amenity::query()
-            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%")
-                ->orWhere('slug', 'like', "%{$request->search}%"))
-            ->paginate($request->per_page ?? 15);
+        $amenities = Amenity::all(); // Fetch all categories without filters
+
+        if ($amenities->isEmpty()) {
+            return response()->json(['message' => 'No amenities found'], 404);
+        }
 
         return response()->json($amenities);
     }

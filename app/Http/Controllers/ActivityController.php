@@ -12,14 +12,15 @@ class ActivityController extends Controller
      * Display a listing of activities with optional filtering
      * GET /activities
      *
-     * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $activities = Activity::query()
-            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%"))
-            ->paginate($request->per_page ?? 15);
+        $activities = Activity::all(); // Fetch all categories without filters
+
+        if ($activities->isEmpty()) {
+            return response()->json(['message' => 'No activities found'], 404);
+        }
 
         return response()->json($activities);
     }

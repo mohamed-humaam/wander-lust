@@ -12,15 +12,15 @@ class LocationController extends Controller
      * Display a listing of locations with optional filtering
      * GET /locations
      *
-     * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $locations = Location::query()
-            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%")
-                ->orWhere('slug', 'like', "%{$request->search}%"))
-            ->paginate($request->per_page ?? 15);
+        $locations = Location::all(); // Fetch all categories without filters
+
+        if ($locations->isEmpty()) {
+            return response()->json(['message' => 'No locations found'], 404);
+        }
 
         return response()->json($locations);
     }

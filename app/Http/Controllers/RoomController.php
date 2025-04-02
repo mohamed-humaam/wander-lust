@@ -12,14 +12,15 @@ class RoomController extends Controller
      * Display a listing of rooms with optional filtering
      * GET /rooms
      *
-     * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $rooms = Room::query()
-            ->when($request->search, fn($query) => $query->where('name', 'like', "%{$request->search}%"))
-            ->paginate($request->per_page ?? 15);
+        $rooms = Room::all(); // Fetch all categories without filters
+
+        if ($rooms->isEmpty()) {
+            return response()->json(['message' => 'No rooms found'], 404);
+        }
 
         return response()->json($rooms);
     }

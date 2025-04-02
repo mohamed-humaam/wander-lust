@@ -12,7 +12,6 @@ class CategoryController extends Controller
      * Display a listing of categories with optional filtering
      * GET /categories
      *
-     * @param Request $request
      * @return JsonResponse
      */
     public function index(): JsonResponse
@@ -25,8 +24,6 @@ class CategoryController extends Controller
 
         return response()->json($categories);
     }
-
-
 
     /**
      * Store a newly created category
