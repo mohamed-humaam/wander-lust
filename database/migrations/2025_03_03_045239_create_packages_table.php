@@ -22,6 +22,8 @@ return new class extends Migration
             $table->json('description')->nullable();
             $table->decimal('price', 8, 2)->default(0);
             $table->integer('duration')->nullable()->default(0);
+            $table->integer('max_guests')->nullable()->default(0);
+            $table->integer('min_age')->nullable()->default(0);
             $table->timestamps();
         });
     }
