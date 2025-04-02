@@ -88,6 +88,8 @@ class CategoryResource extends Resource
                             ->multiple()
                             ->reorderable()
                             ->directory('categories/images')
+                            ->visibility('public') // Make sure visibility is set to public
+                            ->disk('public') // Explicitly set the disk to public
                             ->helperText('Upload high-quality images that showcase this category (recommended size: 1200×800px)')
                             ->imageResizeMode('cover')
                             ->panelAspectRatio('16:9')
