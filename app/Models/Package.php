@@ -12,7 +12,7 @@ class Package extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['name', 'slug', 'images', 'gallery', 'category_id', 'location_id', 'description', 'price', 'duration', 'max_guests', 'min_age'];
+    protected $fillable = ['name', 'slug', 'images', 'gallery', 'category_id', 'location_id', 'description', 'price', 'duration'];
     protected $casts = ['images' => 'array', 'gallery' => 'array', 'description' => 'array', 'duration' => 'integer'];
 
     public function category(): BelongsTo
