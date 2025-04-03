@@ -129,7 +129,7 @@ class PackageResource extends Resource
                                             ])
                                             ->placeholder('Describe the experience, attractions, and benefits of this package')
                                             ->helperText('Use rich formatting to make your description engaging')
-                                            ->fileAttachmentsDirectory('packages/attachments')
+                                            ->fileAttachmentsDirectory('storage/packages/attachments')
                                             ->columnSpan('full'),
                                     ]),
 
@@ -158,7 +158,7 @@ class PackageResource extends Resource
                                             ->image()
                                             ->multiple()
                                             ->maxFiles(5)
-                                            ->directory('packages/images')
+                                            ->directory('storage/packages/images')
                                             ->helperText('Upload up to 5 high-quality feature images (16:9 ratio recommended)')
                                             ->imageResizeMode('cover')
                                             ->imageResizeTargetWidth('1200')
@@ -172,7 +172,7 @@ class PackageResource extends Resource
                                         FileUpload::make('gallery')
                                             ->image()
                                             ->multiple()
-                                            ->directory('packages/gallery')
+                                            ->directory('storage/packages/gallery')
                                             ->helperText('Upload additional images showing various aspects of the package')
                                             ->imageResizeMode('cover')
                                             ->imageResizeTargetWidth('1000')

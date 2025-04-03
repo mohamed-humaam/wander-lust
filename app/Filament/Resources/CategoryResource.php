@@ -103,7 +103,7 @@ class CategoryResource extends Resource
                             ->placeholder('Describe what makes this category special and what travelers can expect...')
                             ->helperText('Include key highlights that will help travelers understand this category')
                             ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsDirectory('category-descriptions')
+                            ->fileAttachmentsDirectory('storage/category-descriptions')
                             ->toolbarButtons([
                                 'blockquote',
                                 'bold',

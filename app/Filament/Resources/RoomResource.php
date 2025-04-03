@@ -80,7 +80,7 @@ class RoomResource extends Resource
                     ->schema([
                         FileUpload::make('icon')
                             ->image()
-                            ->directory('icons')
+                            ->directory('storage/icons')
                             ->imageResizeMode('cover')
                             ->imageCropAspectRatio('1:1')
                             ->imageResizeTargetWidth('120')
@@ -91,7 +91,7 @@ class RoomResource extends Resource
                             ->image()
                             ->multiple()
                             ->reorderable()
-                            ->directory('rooms/images')
+                            ->directory('storage/rooms/images')
                             ->helperText('High-quality photos of the accommodation (recommended: 1600x900px)'),
                     ]),
 
@@ -104,7 +104,7 @@ class RoomResource extends Resource
                             ->placeholder('Describe the accommodation, including its unique features, views, amenities, and decor...')
                             ->helperText('Detailed description with formatting')
                             ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsDirectory('rooms/attachments')
+                            ->fileAttachmentsDirectory('storage/rooms/attachments')
                             ->toolbarButtons([
                                 'blockquote',
                                 'bold',

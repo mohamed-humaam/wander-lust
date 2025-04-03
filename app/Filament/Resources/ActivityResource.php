@@ -57,7 +57,7 @@ class ActivityResource extends Resource
                     ->schema([
                         FileUpload::make('icon')
                             ->image()
-                            ->directory('/icons')
+                            ->directory('storage/icons')
                             ->helperText('Upload a square icon (recommended size: 128×128px)')
                             ->imageCropAspectRatio('1:1')
                             ->imageResizeTargetWidth('128')
@@ -75,7 +75,7 @@ class ActivityResource extends Resource
                             ->placeholder('Describe what travelers can expect from this activity...')
                             ->helperText('Include details like duration, what to bring, difficulty level, etc.')
                             ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsDirectory('activity-descriptions')
+                            ->fileAttachmentsDirectory('storage/activity-descriptions')
                             ->toolbarButtons([
                                 'blockquote',
                                 'bold',

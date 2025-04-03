@@ -64,7 +64,7 @@ class FeatureResource extends Resource
                     ->schema([
                         FileUpload::make('icon')
                             ->image()
-                            ->directory('/icons')
+                            ->directory('storage/icons')
                             ->helperText('Upload a square icon (recommended size: 128×128px)')
                             ->imageCropAspectRatio('1:1')
                             ->imageResizeTargetWidth('128')
@@ -82,7 +82,7 @@ class FeatureResource extends Resource
                             ->placeholder('Describe what makes this feature valuable to travelers...')
                             ->helperText('Highlight how this feature enhances the guest experience')
                             ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsDirectory('feature-descriptions')
+                            ->fileAttachmentsDirectory('storage/feature-descriptions')
                             ->toolbarButtons([
                                 'bold',
                                 'bulletList',

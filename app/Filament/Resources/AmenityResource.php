@@ -67,7 +67,7 @@ class AmenityResource extends Resource
                     ->schema([
                         FileUpload::make('icon')
                             ->image()
-                            ->directory('/icons')
+                            ->directory('storage/icons')
                             ->helperText('Upload a simple, recognizable icon (recommended size: 64×64px)')
                             ->imageCropAspectRatio('1:1')
                             ->imageResizeTargetWidth('64')
@@ -85,7 +85,7 @@ class AmenityResource extends Resource
                             ->placeholder('Describe the amenity and its value to travelers...')
                             ->helperText('Keep descriptions concise but informative')
                             ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsDirectory('amenity-descriptions')
+                            ->fileAttachmentsDirectory('storage/amenity-descriptions')
                             ->toolbarButtons([
                                 'bold',
                                 'bulletList',

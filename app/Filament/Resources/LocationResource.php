@@ -58,7 +58,7 @@ class LocationResource extends Resource
                             ->image()
                             ->multiple()
                             ->reorderable()
-                            ->directory('locations/images')
+                            ->directory('storage/locations/images')
                             ->helperText('Upload main featured images (recommended size: 1920x1080px)')
                             ->maxFiles(5),
 
@@ -66,7 +66,7 @@ class LocationResource extends Resource
                             ->image()
                             ->multiple()
                             ->reorderable()
-                            ->directory('locations/gallery')
+                            ->directory('storage/locations/gallery')
                             ->helperText('Upload additional gallery images to showcase the destination'),
                     ]),
 
@@ -82,7 +82,7 @@ class LocationResource extends Resource
                             ->placeholder('Describe what makes this destination special, including attractions, activities, and experiences...')
                             ->helperText('Detailed description of the destination with formatting')
                             ->fileAttachmentsDisk('public')
-                            ->fileAttachmentsDirectory('locations/attachments'),
+                            ->fileAttachmentsDirectory('storage/locations/attachments'),
 
                         Textarea::make('google_location')
                             ->placeholder('<iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>')
