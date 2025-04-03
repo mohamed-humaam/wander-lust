@@ -87,7 +87,7 @@ class CategoryResource extends Resource
                             ->image()
                             ->multiple()
                             ->reorderable()
-                            ->directory('categories/images')
+                            ->directory('storage/categories/images')
                             ->helperText('Upload high-quality images that showcase this category (recommended size: 1200×800px)')
                             ->imageResizeMode('cover')
                             ->panelAspectRatio('16:9')
