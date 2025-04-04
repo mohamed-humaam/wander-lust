@@ -16,6 +16,7 @@ class Room extends Model
     protected $fillable = ['name', 'icon', 'images', 'description', 'price', 'size', 'parent_id'];
     protected $casts = [
         'description' => 'array',
+        'images' => 'array',
         'size' => 'decimal:2',
         'price' => 'decimal:2',
     ];
