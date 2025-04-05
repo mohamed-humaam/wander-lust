@@ -57,7 +57,7 @@ class ActivityResource extends Resource
                     ->schema([
                         FileUpload::make('icon')
                             ->image()
-                            ->directory('storage/icons')
+                            ->directory('icons')
                             ->helperText('Upload a square icon (recommended size: 128×128px)')
                             ->imageCropAspectRatio('1:1')
                             ->imageResizeTargetWidth('128')

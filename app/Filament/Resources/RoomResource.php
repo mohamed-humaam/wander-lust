@@ -80,7 +80,7 @@ class RoomResource extends Resource
                     ->schema([
                         FileUpload::make('icon')
                             ->image()
-                            ->directory('storage/icons')
+                            ->directory('icons')
                             ->imageResizeMode('cover')
                             ->imageCropAspectRatio('1:1')
                             ->imageResizeTargetWidth('120')
@@ -91,7 +91,7 @@ class RoomResource extends Resource
                             ->image()
                             ->multiple()
                             ->reorderable()
-                            ->directory('storage/rooms/images')
+                            ->directory('rooms/images')
                             ->helperText('High-quality photos of the accommodation (recommended: 1600x900px)'),
                     ]),
 

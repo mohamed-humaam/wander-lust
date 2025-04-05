@@ -67,7 +67,7 @@ class AmenityResource extends Resource
                     ->schema([
                         FileUpload::make('icon')
                             ->image()
-                            ->directory('storage/icons')
+                            ->directory('icons')
                             ->helperText('Upload a simple, recognizable icon (recommended size: 64×64px)')
                             ->imageCropAspectRatio('1:1')
                             ->imageResizeTargetWidth('64')

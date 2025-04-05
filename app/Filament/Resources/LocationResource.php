@@ -58,7 +58,7 @@ class LocationResource extends Resource
                             ->image()
                             ->multiple()
                             ->reorderable()
-                            ->directory('storage/locations/images')
+                            ->directory('locations/images')
                             ->helperText('Upload main featured images (recommended size: 1920x1080px)')
                             ->maxFiles(5),
 
@@ -66,7 +66,7 @@ class LocationResource extends Resource
                             ->image()
                             ->multiple()
                             ->reorderable()
-                            ->directory('storage/locations/gallery')
+                            ->directory('locations/gallery')
                             ->helperText('Upload additional gallery images to showcase the destination'),
                     ]),
 
