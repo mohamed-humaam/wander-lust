@@ -9,14 +9,6 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use GuzzleHttp\Client;
-
-// Configure Guzzle client to ignore SSL verification
-app()->singleton('api.client', function () {
-    return new Client([
-        'verify' => false, // Disables SSL certificate verification
-    ]);
-});
 
 /**
  * API Routes
