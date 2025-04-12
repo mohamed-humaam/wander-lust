@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Http;
 
 class PackageController extends Controller
 {
@@ -17,20 +16,18 @@ class PackageController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        try {
-            // External API call (even if SSL cert is self-signed or missing)
-            $response = Http::withOptions([
-                'verify' => false, // <-- Ignore SSL errors
-            ])->get('https://admin.wanderlustadventuresmv.com/api/packages');
+        // Get the 'with' parameter from the request, allowing multiple relations
+        $relations = $request->query('with') ? explode(',', $request->query('with')) : [];
 
-            if ($response->successful()) {
-                return response()->json($response->json());
-            }
+        // Fetch packages with the requested relationships
+        $packages = Package::with($relations)->get();
 
-            return response()->json(['error' => 'Failed to fetch data'], $response->status());
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+        // Check if no packages exist
+        if ($packages->isEmpty()) {
+            return response()->json(['message' => 'No packages found'], 404);
         }
+
+        return response()->json($packages);
     }
 
     /**
