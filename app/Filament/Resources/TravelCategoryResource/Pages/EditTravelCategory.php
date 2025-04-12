@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\CategoryResource\Pages;
 
-use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\TravelCategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditCategory extends EditRecord
+class EditTravelCategory extends EditRecord
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = TravelCategoryResource::class;
 
     protected function getHeaderActions(): array
     {

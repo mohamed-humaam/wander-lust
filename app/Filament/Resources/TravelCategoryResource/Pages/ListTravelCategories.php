@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\CategoryResource\Pages;
 
-use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\TravelCategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListCategories extends ListRecords
+class ListTravelCategories extends ListRecords
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = TravelCategoryResource::class;
 
     protected function getHeaderActions(): array
     {

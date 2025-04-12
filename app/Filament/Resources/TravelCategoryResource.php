@@ -19,7 +19,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class CategoryResource extends Resource
+class TravelCategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
@@ -189,9 +189,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListTravelCategories::route('/'),
+            'create' => Pages\CreateTravelCategory::route('/create'),
+            'edit' => Pages\EditTravelCategory::route('/{record}/edit'),
         ];
     }
 
