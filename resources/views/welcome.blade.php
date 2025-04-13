@@ -32,5 +32,7 @@
     <h1 class="text-3xl font-bold">Hello World!</h1>
     <p class="mt-4">Welcome to WanderLust Adventures</p>
 </div>
+
+@include('components.navigations.footer')
 </body>
 </html>
