@@ -1,6 +1,6 @@
 @php use App\Models\Category; @endphp
 
-<!-- main-footer -->
+    <!-- main-footer -->
 <footer class="main-footer">
     <div class="container">
         <div class="footer-content">
@@ -12,7 +12,9 @@
                             <img src="{{ asset('assets/images/logo/logo.svg') }}" alt="WanderLust" class="h-20">
                         </div>
                         <div class="text">
-                            <p>Wanderlust Adventures, based in Addu, offers personalized inbound and outbound travel experiences. We specialize in creating unforgettable journeys to the Maldives and global destinations, turning your wanderlust into lasting memories.</p>
+                            <p>Wanderlust Adventures, based in Addu, offers personalized inbound and outbound travel
+                                experiences. We specialize in creating unforgettable journeys to the Maldives and global
+                                destinations, turning your wanderlust into lasting memories.</p>
                         </div>
                         <ul class="footer-social">
                             <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
@@ -43,7 +45,8 @@
                                                 <ul class="ml-4 mt-2 space-y-2">
                                                     @foreach($category->children as $child)
                                                         <li>
-                                                            <a href="/packages/category/{{ $child->slug }}" class="text-sm opacity-80 hover:opacity-100">
+                                                            <a href="/packages/category/{{ $child->slug }}"
+                                                               class="text-sm opacity-80 hover:opacity-100">
                                                                 {{ $child->name }}
                                                             </a>
                                                         </li>
@@ -61,9 +64,13 @@
                             <div class="contact-widget footer-widget">
                                 <div class="footer-title">Contacts</div>
                                 <div class="text">
-                                    <p class="address"><i class="fas fa-map-marker-alt"></i> <span>Mendhurah Folheymaage, Ground Floor, Elha Didi Magu, S.Hithadhoo, Maldives</span></p>
-                                    <p class="phone"><i class="fas fa-phone-alt"></i> <span><a href="tel:+9603339796">+960 333-9796</a></span></p>
-                                    <p class="email"><i class="fas fa-envelope"></i> <span><a href="mailto:reservations@wanderlustadventuresmv.com">reservations@wanderlustadventuresmv.com</a></span></p>
+                                    <p class="address"><i class="fas fa-map-marker-alt"></i> <span>Mendhurah Folheymaage, Ground Floor, Elha Didi Magu, S.Hithadhoo, Maldives</span>
+                                    </p>
+                                    <p class="phone"><i class="fas fa-phone-alt"></i> <span><a href="tel:+9603339796">+960 333-9796</a></span>
+                                    </p>
+                                    <p class="email"><i class="fas fa-envelope"></i> <span><a
+                                                href="mailto:reservations@wanderlustadventuresmv.com">reservations@wanderlustadventuresmv.com</a></span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -79,12 +86,15 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6 col-sm-12 column">
-                <div class="copyright"><a href="#">WanderLust Adventures</a> &copy; {{ date('Y') }} All Rights Reserved</div>
+                <div class="copyright"><a href="#">WanderLust Adventures</a> &copy; {{ date('Y') }} All Rights Reserved
+                </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 column">
                 <ul class="footer-nav">
                     <li><a href="tel:+9603339796">+960 333-9796</a></li>
-                    <li><a href="mailto:reservations@wanderlustadventuresmv.com">reservations@wanderlustadventuresmv.com</a></li>
+                    <li>
+                        <a href="mailto:reservations@wanderlustadventuresmv.com">reservations@wanderlustadventuresmv.com</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -553,6 +563,7 @@
             margin-left: 0;
             transform: translateX(-50%);
         }
+
         /* End of mobile/tablet centering styles */
     }
 
