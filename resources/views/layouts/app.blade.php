@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>{{ config('app.name', 'WanderLust') }}</title>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Any additional CSS you need -->
     <style>
-        /* Add your custom animations here */
         @keyframes indicator-enter {
             0% {
                 transform: translateX(-50%) scaleX(0);
@@ -24,13 +25,17 @@
     </style>
 </head>
 <body>
-<!-- Include the navbar -->
-@include('components.navigations.navbar')
+<!-- Include the navbar component -->
+@include('components.navbar')
 
-<!-- Hello World content with spacing to account for the fixed navbar -->
-<div class="container mx-auto px-4 pt-24">
-    <h1 class="text-3xl font-bold">Hello World!</h1>
-    <p class="mt-4">Welcome to WanderLust Adventures</p>
-</div>
+<!-- Main content -->
+<main class="pt-20">
+    @yield('content')
+</main>
+
+<!-- Scripts -->
+<script>
+    // Any global scripts you need
+</script>
 </body>
 </html>
