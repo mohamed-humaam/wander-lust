@@ -36,4 +36,9 @@ class Room extends Model
     {
         return $this->belongsToMany(Package::class, 'room_pivots');
     }
+
+    public function roomLinks(): BelongsToMany
+    {
+        return $this->belongsToMany(RoomLink::class, 'room_links');
+    }
 }

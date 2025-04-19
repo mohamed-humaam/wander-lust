@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RoomPivot;
+use App\Models\RoomLink;
 use Illuminate\Http\Request;
 
 class RoomPivotController extends Controller
@@ -34,7 +34,7 @@ class RoomPivotController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RoomPivot $roomPivot)
+    public function show(RoomLink $roomPivot)
     {
         //
     }
@@ -42,7 +42,7 @@ class RoomPivotController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RoomPivot $roomPivot)
+    public function edit(RoomLink $roomPivot)
     {
         //
     }
@@ -50,7 +50,7 @@ class RoomPivotController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RoomPivot $roomPivot)
+    public function update(Request $request, RoomLink $roomPivot)
     {
         //
     }
@@ -58,7 +58,7 @@ class RoomPivotController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RoomPivot $roomPivot)
+    public function destroy(RoomLink $roomPivot)
     {
         //
     }

@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RoomPivotResource\Pages;
 
 //use App\Filament\Resources\RoomPivotResource\RelationManagers;
-use App\Models\RoomPivot;
+use App\Models\RoomLink;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -22,7 +22,7 @@ class RoomPivotResource extends Resource
     // comment out this to view the resource
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?string $model = RoomPivot::class;
+    protected static ?string $model = RoomLink::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-link';
 
