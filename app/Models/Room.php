@@ -37,8 +37,22 @@ class Room extends Model
         return $this->belongsToMany(Package::class, 'room_pivots');
     }
 
-    public function roomLinks(): BelongsToMany
+    public function roomLinks(): HasMany
     {
-        return $this->belongsToMany(RoomLink::class, 'room_links');
+        return $this->hasMany(RoomLink::class);
+    }
+
+    public function getCategories()
+    {
+        return $this->roomLinks->map(function ($link) {
+            return $link->category;
+        })->unique('id');
+    }
+
+    public function getLocations()
+    {
+        return $this->roomLinks->map(function ($link) {
+            return $link->location;
+        })->unique('id');
     }
 }
