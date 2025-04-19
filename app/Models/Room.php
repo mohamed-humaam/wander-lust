@@ -13,7 +13,7 @@ class Room extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['name', 'icon', 'images', 'description', 'price', 'size', 'parent_id'];
+    protected $fillable = ['name', 'icon', 'images', 'description', 'price_per_night', 'size', 'parent_id'];
     protected $casts = [
         'description' => 'array',
         'images' => 'array',
