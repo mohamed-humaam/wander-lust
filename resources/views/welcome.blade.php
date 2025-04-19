@@ -21,6 +21,10 @@
         .animate-indicator {
             animation: indicator-enter 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
+
+        body {
+            background-color: red;
+        }
     </style>
 </head>
 <body>
@@ -30,6 +34,7 @@
 <!-- Hello World content with spacing to account for the fixed navbar -->
 <div class="container mx-auto px-4 pt-24">
     <h1 class="text-3xl font-bold">Hello World!</h1>
+    @include('components.homepage.search-form')
     <p class="mt-4">Welcome to WanderLust Adventures</p>
 </div>
 
