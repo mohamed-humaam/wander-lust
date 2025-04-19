@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('rooms', function (Blueprint $table) {
-            $table->decimal('size', 8, 2)->default(0);
             $table->json('images')->nullable();
         });
     }
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('rooms', function (Blueprint $table) {
-            $table->dropColumn(['size', 'images']);
+            $table->dropColumn('images');
         });
     }
 };
