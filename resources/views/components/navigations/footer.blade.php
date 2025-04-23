@@ -123,11 +123,6 @@
         font-family: 'Playfair Display', serif;
     }
 
-    section {
-        padding: 60px 0;
-        min-height: 100vh;
-    }
-
     a, a:hover, a:focus, a:active {
         text-decoration: none;
         outline: none;

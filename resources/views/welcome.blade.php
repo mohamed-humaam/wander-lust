@@ -29,6 +29,8 @@
 
 @include('components.homepage.hero')
 
+@include('components.homepage.airline')
+
 @include('components.navigations.footer')
 </body>
 </html>
