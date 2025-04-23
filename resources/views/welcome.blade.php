@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WanderLust</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Font Awesome CDN for icons --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        /* Add your custom animations here */
         @keyframes indicator-enter {
             0% {
                 transform: translateX(-50%) scaleX(0);
@@ -24,7 +27,6 @@
     </style>
 </head>
 <body>
-<!-- Include the navbar -->
 @include('components.navigations.navbar')
 
 @include('components.homepage.hero')
@@ -32,6 +34,8 @@
 @include('components.homepage.airline')
 
 @include('components.homepage.why-us')
+
+@include('components.homepage.testimonials')
 
 @include('components.navigations.footer')
 </body>
