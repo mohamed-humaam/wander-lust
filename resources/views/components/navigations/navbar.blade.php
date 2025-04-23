@@ -1,7 +1,7 @@
 @php use App\Models\Category; @endphp
     <!-- navbar.blade.php -->
 <nav
-    class="fixed w-full z-50 py-0 px-6 h-[80px] flex items-center bg-white transition-all duration-300 ease-in-out top-0 {{ request()->routeIs('scrolled') ? 'shadow-sm h-[70px] bg-white backdrop-blur-md' : '' }}">
+    class="fixed w-full z-50 py-0 px-6 h-[80px] flex items-center bg-transparent transition-all duration-300 ease-in-out top-0 {{ request()->routeIs('scrolled') ? 'shadow-sm h-[70px] bg-blue-900 backdrop-blur-md' : '' }}">
     <div class="flex items-center justify-between w-full max-w-[1200px] mx-auto h-full">
         <!-- Logo -->
         <div class="z-60 flex items-center justify-center h-full">
@@ -21,7 +21,8 @@
                 @php
                     $navItems = [
                         ['label' => 'Home', 'path' => '/', 'hasDropdown' => false],
-                        ['label' => 'Packages', 'path' => '/packages', 'hasDropdown' => true],
+                        ['label' => 'Stays', 'path' => '/packages', 'hasDropdown' => true],
+                        ['label' => 'Special Holiday Packages', 'path' => '/packages', 'hasDropdown' => true],
                         ['label' => 'Contact', 'path' => '/contact-us', 'hasDropdown' => false]
                     ];
                 @endphp
@@ -30,7 +31,7 @@
                     <li class="relative">
                         @if (!isset($item['hasDropdown']) || !$item['hasDropdown'])
                             <a href="{{ $item['path'] }}"
-                               class="relative inline-block py-2 px-4 text-gray-900 no-underline font-medium text-base transition-all duration-300 ease-in-out hover:text-[#ff5e14] {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}">
+                               class="relative inline-block py-2 px-4 text-white no-underline font-medium text-base transition-all duration-300 ease-in-out hover:text-[#ff5e14] {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}">
                                 {{ $item['label'] }}
                                 @if(request()->is(trim($item['path'], '/')))
                                     <span
@@ -40,7 +41,7 @@
                         @else
                             <div class="dropdown-container" onmouseleave="handleDropdownLeave()">
                                 <a href="{{ $item['path'] }}"
-                                   class="relative inline-flex items-center gap-1 py-2 px-4 text-gray-900 no-underline font-medium text-base transition-all duration-300 ease-in-out hover:text-[#ff5e14] {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}">
+                                   class="relative inline-flex items-center gap-1 py-2 px-4 text-white no-underline font-medium text-base transition-all duration-300 ease-in-out hover:text-[#ff5e14] {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}">
                                     {{ $item['label'] }}
                                     @if(request()->is(trim($item['path'], '/')))
                                         <span
@@ -53,7 +54,7 @@
                                     </svg>
                                 </a>
                                 <div
-                                    class="dropdown-menu absolute top-full left-0 bg-white rounded-lg shadow-md min-w-[220px] opacity-0 invisible translate-y-[10px] transition-all duration-200 ease-in-out z-40">
+                                    class="dropdown-menu absolute top-full left-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-lg shadow-md min-w-[220px] opacity-0 invisible translate-y-[10px] transition-all duration-200 ease-in-out z-40">
                                     <div class="py-2">
                                         @php
                                             $parentCategories = Category::whereNull('parent_id')->get();
@@ -62,7 +63,7 @@
                                         @foreach($parentCategories as $category)
                                             <div class="dropdown-item-container relative">
                                                 <a href="/packages/category/{{ $category->slug }}"
-                                                   class="dropdown-item flex items-center justify-between py-[10px] px-4 text-gray-900 no-underline text-sm transition-all duration-300 ease-in-out hover:bg-gray-50 hover:text-[#ff5e14]"
+                                                   class="dropdown-item flex items-center justify-between py-[10px] px-4 text-gray-800 dark:text-gray-200 no-underline text-sm transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-[#ff5e14]"
                                                    onmouseenter="handleParentHover('{{ $category->id }}')">
                                                     {{ $category->name }}
 
@@ -85,10 +86,10 @@
 
                                                 @if(Category::where('parent_id', $category->id)->exists())
                                                     <div id="submenu-{{ $category->id }}"
-                                                         class="dropdown-submenu absolute left-full top-0 min-w-[200px] bg-white rounded-lg shadow-md py-2 opacity-0 invisible translate-x-[10px] transition-all duration-200 ease-in-out z-50">
+                                                         class="dropdown-submenu absolute left-full top-0 min-w-[200px] bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-lg shadow-md py-2 opacity-0 invisible translate-x-[10px] transition-all duration-200 ease-in-out z-50">
                                                         @foreach(Category::where('parent_id', $category->id)->get() as $child)
                                                             <a href="/packages/category/{{ $child->slug }}"
-                                                               class="dropdown-subitem block py-[10px] px-4 text-gray-900 no-underline text-sm transition-all duration-300 ease-in-out hover:bg-gray-50 hover:text-[#ff5e14]">
+                                                               class="dropdown-subitem block py-[10px] px-4 text-gray-800 dark:text-gray-200 no-underline text-sm transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-[#ff5e14]">
                                                                 {{ $child->name }}
                                                             </a>
                                                         @endforeach
@@ -109,28 +110,28 @@
         <div class="md:hidden z-60">
             <button id="mobile-toggle"
                     class="flex flex-col justify-between w-[30px] h-[20px] bg-transparent border-none cursor-pointer p-0">
-                <span class="block w-full h-[2px] bg-gray-900 transition-all duration-300 ease-in-out rounded"></span>
-                <span class="block w-full h-[2px] bg-gray-900 transition-all duration-300 ease-in-out rounded"></span>
-                <span class="block w-full h-[2px] bg-gray-900 transition-all duration-300 ease-in-out rounded"></span>
+                <span class="block w-full h-[2px] bg-white transition-all duration-300 ease-in-out rounded"></span>
+                <span class="block w-full h-[2px] bg-white transition-all duration-300 ease-in-out rounded"></span>
+                <span class="block w-full h-[2px] bg-white transition-all duration-300 ease-in-out rounded"></span>
             </button>
         </div>
     </div>
 
     <!-- Mobile Menu Drawer -->
     <div id="mobile-menu"
-         class="fixed top-0 right-0 w-[300px] h-screen bg-white z-40 shadow-md overflow-y-auto translate-x-full transition-transform duration-300 ease-in-out">
+         class="fixed top-0 right-0 w-[300px] h-screen bg-white dark:bg-gray-800 z-40 shadow-md overflow-y-auto translate-x-full transition-transform duration-300 ease-in-out">
         <div class="flex flex-col justify-between px-8 pt-[100px] pb-8 h-full">
             <div class="flex flex-col">
                 @foreach ($navItems as $index => $item)
                     @if (!isset($item['hasDropdown']) || !$item['hasDropdown'])
                         <a href="{{ $item['path'] }}"
-                           class="relative text-xl text-gray-900 no-underline py-4 border-b border-gray-200 font-medium transition-all duration-300 ease-in-out hover:text-[#ff5e14] {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}">
+                           class="relative text-xl text-gray-800 dark:text-gray-200 no-underline py-4 border-b border-gray-200 dark:border-gray-700 font-medium transition-all duration-300 ease-in-out hover:text-[#ff5e14] {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}">
                             {{ $item['label'] }}
                         </a>
                     @else
                         <div class="mobile-dropdown">
                             <div
-                                class="flex items-center justify-between relative text-xl text-gray-900 py-4 border-b border-gray-200 font-medium transition-all duration-300 ease-in-out hover:text-[#ff5e14] cursor-pointer {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}"
+                                class="flex items-center justify-between relative text-xl text-gray-800 dark:text-gray-200 py-4 border-b border-gray-200 dark:border-gray-700 font-medium transition-all duration-300 ease-in-out hover:text-[#ff5e14] cursor-pointer {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}"
                                 onclick="toggleMobileDropdown({{ $index }})">
                                 {{ $item['label'] }}
                                 <svg class="dropdown-icon transition-transform duration-300 ease-in-out"
@@ -152,7 +153,7 @@
                                 @foreach($parentCategories as $category)
                                     <div class="parent-category-container">
                                         <a href="/packages/category/{{ $category->slug }}"
-                                           class="mobile-dropdown-item text-gray-500 no-underline py-3 px-4 text-lg border-b border-gray-200 transition-all duration-300 ease-in-out hover:text-[#ff5e14] relative flex items-center before:content-[''] before:w-2 before:h-2 before:rounded-full before:bg-gray-200 before:mr-3 before:transition-all before:duration-300 before:ease-in-out hover:before:bg-[#ff5e14]">
+                                           class="mobile-dropdown-item text-gray-600 dark:text-gray-300 no-underline py-3 px-4 text-lg border-b border-gray-200 dark:border-gray-700 transition-all duration-300 ease-in-out hover:text-[#ff5e14] relative flex items-center before:content-[''] before:w-2 before:h-2 before:rounded-full before:bg-gray-200 before:mr-3 before:transition-all before:duration-300 before:ease-in-out hover:before:bg-[#ff5e14]">
                                             {{ $category->name }}
                                         </a>
 
@@ -161,7 +162,7 @@
                                                 class="mobile-child-categories pl-0 ml-4 border-l-2 border-[#ff5e14] mb-2">
                                                 @foreach(Category::where('parent_id', $category->id)->get() as $child)
                                                     <a href="/packages/category/{{ $child->slug }}"
-                                                       class="mobile-dropdown-item child text-base py-[10px] px-4 text-gray-900 relative opacity-80 border-b-0 hover:opacity-100 hover:bg-[rgba(255,94,20,0.05)]">
+                                                       class="mobile-dropdown-item child text-base py-[10px] px-4 text-gray-700 dark:text-gray-300 relative opacity-80 border-b-0 hover:opacity-100 hover:bg-[rgba(255,94,20,0.05)]">
                                                         {{ $child->name }}
                                                     </a>
                                                 @endforeach
@@ -178,7 +179,7 @@
             <div class="mt-8">
                 <div class="flex gap-4 mb-6">
                     <a href="#"
-                       class="flex items-center justify-center w-[42px] h-[42px] rounded-full bg-gray-50 text-gray-900 transition-all duration-300 ease-in-out hover:bg-[#ff5e14] hover:text-white"
+                       class="flex items-center justify-center w-[42px] h-[42px] rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-all duration-300 ease-in-out hover:bg-[#ff5e14] hover:text-white"
                        aria-label="Twitter">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
                             <path
@@ -187,7 +188,7 @@
                         </svg>
                     </a>
                     <a href="#"
-                       class="flex items-center justify-center w-[42px] h-[42px] rounded-full bg-gray-50 text-gray-900 transition-all duration-300 ease-in-out hover:bg-[#ff5e14] hover:text-white"
+                       class="flex items-center justify-center w-[42px] h-[42px] rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-all duration-300 ease-in-out hover:bg-[#ff5e14] hover:text-white"
                        aria-label="Instagram">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
                             <path
@@ -201,7 +202,7 @@
                         </svg>
                     </a>
                     <a href="#"
-                       class="flex items-center justify-center w-[42px] h-[42px] rounded-full bg-gray-50 text-gray-900 transition-all duration-300 ease-in-out hover:bg-[#ff5e14] hover:text-white"
+                       class="flex items-center justify-center w-[42px] h-[42px] rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-all duration-300 ease-in-out hover:bg-[#ff5e14] hover:text-white"
                        aria-label="YouTube">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
                             <path
@@ -306,13 +307,19 @@
         function handleScroll() {
             const navbar = document.querySelector('nav');
             if (window.scrollY > 50) {
-                navbar.classList.add('shadow-sm', 'h-[70px]', 'bg-white', 'backdrop-blur-md');
+                navbar.classList.add('shadow-sm', 'h-[70px]', 'bg-blue-900', 'backdrop-blur-md');
             } else {
-                navbar.classList.remove('shadow-sm', 'h-[70px]', 'bg-white', 'backdrop-blur-md');
+                navbar.classList.remove('shadow-sm', 'h-[70px]', 'bg-blue-900', 'backdrop-blur-md');
             }
         }
 
         window.addEventListener('scroll', handleScroll);
+
+        // Check if user prefers dark mode
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDarkMode) {
+            document.documentElement.classList.add('dark');
+        }
 
         // Handle keyboard escape to close mobile menu
         document.addEventListener('keydown', function (e) {
@@ -362,5 +369,37 @@
 
     #mobile-toggle.open span:nth-child(3) {
         transform: translateY(-9px) rotate(-45deg);
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        .dark\:bg-gray-800 {
+            background-color: rgb(31, 41, 55);
+        }
+
+        .dark\:bg-gray-700 {
+            background-color: rgb(55, 65, 81);
+        }
+
+        .dark\:border-gray-700 {
+            border-color: rgb(55, 65, 81);
+        }
+
+        .dark\:text-gray-200 {
+            color: rgb(229, 231, 235);
+        }
+
+        .dark\:text-gray-300 {
+            color: rgb(209, 213, 219);
+        }
+
+        .dark\:bg-gray-800\/95 {
+            background-color: rgba(31, 41, 55, 0.95);
+        }
+    }
+
+    /* Dropdown styling */
+    .dropdown-menu, .dropdown-submenu {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
 </style>
