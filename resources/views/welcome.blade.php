@@ -31,6 +31,8 @@
 
 @include('components.homepage.airline')
 
+@include('components.homepage.why-us')
+
 @include('components.navigations.footer')
 </body>
 </html>
