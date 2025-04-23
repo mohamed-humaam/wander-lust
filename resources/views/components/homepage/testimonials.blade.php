@@ -58,7 +58,8 @@
                                 <div class="text-blue-600 font-medium mb-4">City Tour</div>
                                 <blockquote class="text-gray-800 font-medium leading-relaxed">
                                     "We spend some nice hours in Male while waiting for our flight. We went to
-                                    to all the historic and cultural sights and were told to us about it all in an interesting
+                                    to all the historic and cultural sights and were told to us about it all in an
+                                    interesting
                                     way. We felt very safe and in good hands during the whole tour. Thank you for
                                     showing us your city!"
                                 </blockquote>
@@ -140,7 +141,9 @@
                                 class="bg-blue-100 rounded-xl p-8 shadow-lg border border-gray-100 h-full transition-transform duration-300 hover:shadow-xl">
                                 <div class="text-blue-600 font-medium mb-4">City Tour</div>
                                 <blockquote class="text-gray-800 font-medium leading-relaxed">
-                                    "Excellent service! The team was incredibly helpful and went above and beyond to assist me with my booking. They made the whole process smooth and stress-free. I highly recommend ......."
+                                    "Excellent service! The team was incredibly helpful and went above and beyond to
+                                    assist me with my booking. They made the whole process smooth and stress-free. I
+                                    highly recommend ......."
                                 </blockquote>
                                 <div class="pt-6 mt-6 border-t border-gray-200">
                                     <div class="flex items-center space-x-4">
@@ -165,7 +168,9 @@
                                 class="bg-blue-100 rounded-xl p-8 shadow-lg border border-gray-100 h-full transition-transform duration-300 hover:shadow-xl">
                                 <div class="text-blue-600 font-medium mb-4">City Tour</div>
                                 <blockquote class="text-gray-800 font-medium leading-relaxed">
-                                    "One of the best Travel Agency in Maldives. Wanderlust Adventure Pvt Ltd is highly recommended for having adventurous trip through Maldives to create unforgettable happy memories that will cherish forever."
+                                    "One of the best Travel Agency in Maldives. Wanderlust Adventure Pvt Ltd is highly
+                                    recommended for having adventurous trip through Maldives to create unforgettable
+                                    happy memories that will cherish forever."
                                 </blockquote>
                                 <div class="pt-6 mt-6 border-t border-gray-200">
                                     <div class="flex items-center space-x-4">
