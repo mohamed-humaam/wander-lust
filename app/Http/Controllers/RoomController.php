@@ -14,9 +14,13 @@ class RoomController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $rooms = Room::all(); // Fetch all categories without filters
+        // Check for relationships to load
+        $relations = $request->query('with') ? explode(',', $request->query('with')) : [];
+
+        // Fetch all rooms with optional eager loading
+        $rooms = Room::with($relations)->get();
 
         if ($rooms->isEmpty()) {
             return response()->json(['message' => 'No rooms found'], 404);

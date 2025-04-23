@@ -14,9 +14,13 @@ class LocationController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $locations = Location::all(); // Fetch all categories without filters
+        // Check for relationships to load
+        $relations = $request->query('with') ? explode(',', $request->query('with')) : [];
+
+        // Fetch all locations with optional eager loading
+        $locations = Location::with($relations)->get();
 
         if ($locations->isEmpty()) {
             return response()->json(['message' => 'No locations found'], 404);
@@ -24,6 +28,7 @@ class LocationController extends Controller
 
         return response()->json($locations);
     }
+
 
     /**
      * Store a newly created location
