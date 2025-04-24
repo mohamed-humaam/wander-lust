@@ -50,4 +50,18 @@ class PackagesController extends Controller
 
         return view('packages.location', compact('location', 'packages', 'categories'));
     }
+
+    public function show($id)
+    {
+        $package = Package::with([
+            'category',
+            'location',
+            'rooms',
+            'activities',
+            'amenities',
+            'features'
+        ])->findOrFail($id);
+
+        return view('packages.package', compact('package'));
+    }
 }

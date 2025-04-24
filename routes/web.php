@@ -28,6 +28,9 @@ Route::get('/packages/category/{slug}', [PackagesController::class, 'category'])
 Route::get('/packages/location/{slug}', [PackagesController::class, 'location'])
     ->name('packages.location');
 
+Route::get('/packages/{id}', [PackagesController::class, 'show'])
+    ->name('packages.show');
+
 // Stays routes
 Route::prefix('stays')->group(function () {
     Route::get('/', [StaysController::class, 'index'])
