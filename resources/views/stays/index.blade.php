@@ -4,15 +4,15 @@
 
 @section('content')
     <!-- Hero Banner Section - Improved Responsiveness with Better Mobile Padding -->
-    <div class="relative h-96 sm:h-112 md:h-128 overflow-hidden">
+    <div class="relative h-[32rem] sm:h-112 md:h-128 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/80 z-10"></div>
         <img
             src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
             alt="Luxury Stays"
             class="absolute w-full h-full object-cover object-center">
-        <div class="container mx-auto pt-24 pb-6 relative z-20 h-full flex flex-col justify-center">
+        <div class="container mx-auto pt-32 sm:pt-24 pb-20 sm:pb-6 px-4 relative z-20 h-full flex flex-col justify-center">
             <div
-                class="mt-16 sm:mt-8 mb-16 sm:mb-8 max-w-2xl bg-black/30 p-4 sm:p-6 md:p-8 rounded-lg backdrop-blur-sm">
+                class="mt-8 mb-8 max-w-2xl bg-black/30 p-4 sm:p-6 md:p-8 rounded-lg backdrop-blur-sm">
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 md:mb-4">Discover Your Perfect
                     Stay</h1>
                 <p class="text-lg sm:text-xl text-white mb-4 md:mb-8">Explore our curated collection of luxury
