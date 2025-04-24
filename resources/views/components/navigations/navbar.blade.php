@@ -135,22 +135,28 @@
                     @else
                         <div class="mobile-dropdown">
                             <div
-                                class="flex items-center justify-between relative text-xl text-gray-800 dark:text-gray-200 py-4 border-b border-gray-200 dark:border-gray-700 font-medium transition-all duration-300 ease-in-out hover:text-[#ff5e14] cursor-pointer {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}"
-                                onclick="toggleMobileDropdown({{ $index }})">
-                                {{ $item['label'] }}
-                                <svg class="dropdown-icon transition-transform duration-300 ease-in-out"
-                                     id="dropdown-icon-{{ $index }}"
-                                     xmlns="http://www.w3.org/2000/svg"
-                                     width="16"
-                                     height="16"
-                                     viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
+                                class="flex items-center justify-between relative border-b border-gray-200 dark:border-gray-700">
+                                <a href="{{ $item['path'] }}"
+                                   class="flex-grow py-4 text-xl text-gray-800 dark:text-gray-200 no-underline font-medium transition-all duration-300 ease-in-out hover:text-[#ff5e14] {{ request()->is(trim($item['path'], '/')) ? 'text-[#ff5e14]' : '' }}">
+                                    {{ $item['label'] }}
+                                </a>
+                                <button
+                                    class="p-2 focus:outline-none"
+                                    onclick="event.preventDefault(); toggleMobileDropdown({{ $index }})">
+                                    <svg class="dropdown-icon transition-transform duration-300 ease-in-out"
+                                         id="dropdown-icon-{{ $index }}"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         width="16"
+                                         height="16"
+                                         viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="2"
+                                         stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
                             </div>
                             <div id="mobile-dropdown-{{ $index }}"
                                  class="mobile-dropdown-content hidden max-h-0 overflow-hidden transition-all duration-300 ease-out">
