@@ -150,18 +150,18 @@
                                 <label class="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Check-in
                                     Date</label>
                                 <input type="date" id="checkInDate"
-                                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-700 dark:text-white">
+                                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-700 dark:text-white appearance-none mobile-date-input">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Check-out
                                     Date</label>
                                 <input type="date" id="checkOutDate"
-                                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-700 dark:text-white">
+                                       class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-700 dark:text-white appearance-none mobile-date-input">
                             </div>
                             <div class="mb-4">
                                 <label class="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Guests</label>
                                 <select id="guestCount"
-                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-700 dark:text-white">
+                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-700 dark:text-white appearance-none mobile-select">
                                     <option value="1">1 Guest</option>
                                     <option value="2">2 Guests</option>
                                     <option value="3">3 Guests</option>
@@ -201,6 +201,52 @@
         </div>
     </div>
 
+    <style>
+        /* Mobile date input styles */
+        @media (max-width: 767px) {
+            .mobile-date-input, .mobile-select {
+                font-size: 16px; /* Prevents iOS zoom on focus */
+                height: 44px; /* Larger touch target */
+                padding-left: 12px;
+                padding-right: 12px;
+                background-color: #fff;
+                border-radius: 8px;
+            }
+
+            .dark .mobile-date-input, .dark .mobile-select {
+                background-color: #374151;
+                color: #fff;
+            }
+
+            /* Reset browser-specific styling */
+            input[type="date"].mobile-date-input {
+                -webkit-appearance: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: right 10px center;
+                background-size: 16px;
+            }
+
+            .dark input[type="date"].mobile-date-input {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D1D5DB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+            }
+
+            /* Hide calendar icon in Safari */
+            input[type="date"].mobile-date-input::-webkit-calendar-picker-indicator {
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                cursor: pointer;
+            }
+        }
+    </style>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Set minimum date to today for check-in and check-out dates
@@ -239,18 +285,18 @@
                 const checkOutDate = document.getElementById('checkOutDate').value;
                 const guestCount = document.getElementById('guestCount').value;
 
-                // Format dates in a more readable format
-                const formattedCheckIn = new Date(checkInDate).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                });
+                // Format dates in a more consistent cross-browser way
+                function formatDate(dateStr) {
+                    const date = new Date(dateStr);
+                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    const month = months[date.getMonth()];
+                    const day = date.getDate();
+                    const year = date.getFullYear();
+                    return `${month} ${day}, ${year}`;
+                }
 
-                const formattedCheckOut = new Date(checkOutDate).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                });
+                const formattedCheckIn = formatDate(checkInDate);
+                const formattedCheckOut = formatDate(checkOutDate);
 
                 // Calculate number of nights
                 const startDate = new Date(checkInDate);
@@ -260,12 +306,12 @@
                 // Construct the WhatsApp message
                 const message = `Hello! I'm interested in booking at ${locationName}.
 
-                Check-in: ${formattedCheckIn}
-                Check-out: ${formattedCheckOut}
-                Duration: ${nights} night${nights > 1 ? 's' : ''}
-                Guests: ${guestCount}
+Check-in: ${formattedCheckIn}
+Check-out: ${formattedCheckOut}
+Duration: ${nights} night${nights > 1 ? 's' : ''}
+Guests: ${guestCount}
 
-                Please let me know about availability and rates. Thank you!`;
+Please let me know about availability and rates. Thank you!`;
 
                 // Encode the message for URL
                 const encodedMessage = encodeURIComponent(message);
