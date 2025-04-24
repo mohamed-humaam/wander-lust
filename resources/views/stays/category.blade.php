@@ -11,7 +11,7 @@
         @else
             <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700"></div>
         @endif
-        <div class="container mx-auto pt-32 sm:pt-24 pb-20 sm:pb-6 px-4 relative z-20 h-full flex flex-col justify-end">
+        <div class="container mx-auto pt-44 sm:pt-24 pb-20 sm:pb-6 px-4 relative z-20 h-full flex flex-col justify-end">
             <div
                 class="max-w-4xl bg-white/10 backdrop-blur-sm rounded-2xl p-8 sm:p-10 border border-white/20 shadow-xl">
                 <div class="flex items-center mb-4">
@@ -35,7 +35,7 @@
                     </a>
                     @if($category->description)
                         <a href="#category-details"
-                           class="flex items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-all duration-300 backdrop-blur-sm">
+                           class="flex items-center px-6 py-3 bg-gray-800/70 hover:bg-gray-700/80 text-white rounded-lg font-medium transition-all duration-300 backdrop-blur-sm">
                             Learn More
                         </a>
                     @endif
