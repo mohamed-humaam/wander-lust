@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\StaysController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,13 +19,14 @@ Route::post('/contact', [ContactController::class, 'submit'])
     ->name('contact.submit');
 
 // Packages routes
-Route::get('/packages', function () {
-    return view('packages.index');
-})->name('packages.index');
+Route::get('/packages', [PackagesController::class, 'index'])
+    ->name('packages.index');
 
-Route::get('/packages/category/{slug}', function ($slug) {
-    return view('packages.category', compact('slug'));
-})->name('packages.category');
+Route::get('/packages/category/{slug}', [PackagesController::class, 'category'])
+    ->name('packages.category');
+
+Route::get('/packages/location/{slug}', [PackagesController::class, 'location'])
+    ->name('packages.location');
 
 // Stays routes
 Route::prefix('stays')->group(function () {
