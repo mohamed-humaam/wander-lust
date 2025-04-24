@@ -10,6 +10,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
+
 // Contact routes
 Route::get('/contact-us', function () {
     return view('contact-us');

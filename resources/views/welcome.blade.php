@@ -51,11 +51,15 @@
 
 @include('components.homepage.hero')
 
-@include('components.homepage.airline')
-
 @include('components.homepage.why-us')
 
+@include('components.homepage.airline')
+
+<x-homepage.featured-packages :packages="$featuredPackages" :limit="3" />
+
 @include('components.homepage.testimonials')
+
+<x-homepage.featured-rooms :rooms="$featuredRooms" :limit="3" />
 
 @include('components.navigations.footer')
 </body>
