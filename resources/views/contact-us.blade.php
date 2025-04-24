@@ -29,7 +29,7 @@
 <body>
 @include('components.navigations.navbar')
 
-@include('components.conatct.contact')
+@include('components.contact.contact')
 
 @include('components.navigations.footer')
 </body>
