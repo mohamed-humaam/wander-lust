@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class RoomLink extends Model
 {
     protected $fillable = [
-        'room_id', 'category_id', 'location_id'
+        'room_id', 'category_id', 'location_id', 'activity_id', 'amenity_id', 'feature_id'
     ];
 
     // Make sure the table name is correctly specified
@@ -26,5 +26,20 @@ class RoomLink extends Model
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function amenity(): BelongsTo
+    {
+        return $this->belongsTo(Amenity::class);
+    }
+
+    public function activity(): BelongsTo
+    {
+        return $this->belongsTo(Activity::class);
+    }
+
+    public function feature(): BelongsTo
+    {
+        return $this->belongsTo(Feature::class);
     }
 }

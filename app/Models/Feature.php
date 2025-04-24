@@ -30,4 +30,9 @@ class Feature extends Model
     {
         return $this->belongsToMany(Package::class, 'feature_pivots');
     }
+
+    public function roomLinks(): HasMany
+    {
+        return $this->hasMany(RoomLink::class, 'feature_id');
+    }
 }

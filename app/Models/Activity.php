@@ -30,4 +30,9 @@ class Activity extends Model
     {
         return $this->belongsToMany(Package::class, 'activity_pivots');
     }
+
+    public function roomLinks(): HasMany
+    {
+        return $this->hasMany(RoomLink::class, 'activity_id');
+    }
 }

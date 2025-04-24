@@ -7,6 +7,9 @@ use App\Filament\Resources\RoomResource\RelationManagers;
 use App\Models\Room;
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\Activity;
+use App\Models\Amenity;
+use App\Models\Feature;
 use App\Models\RoomLink;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -144,12 +147,12 @@ class RoomResource extends Resource
                                     ]),
                             ]),
 
-                        Tab::make('Accommodation Links')
+                        Tab::make('Categories & Locations')
                             ->schema([
                                 Section::make('Category & Location Associations')
                                     ->description('Link this accommodation to categories and locations')
                                     ->schema([
-                                        Repeater::make('roomLinks')
+                                        Repeater::make('categoryLocationLinks')
                                             ->relationship('roomLinks')
                                             ->schema([
                                                 Select::make('category_id')
@@ -183,7 +186,154 @@ class RoomResource extends Resource
                                                 $locationName = Location::find($state['location_id'])->name ?? '(No location)';
                                                 return "{$categoryName} - {$locationName}";
                                             })
-                                            ->addActionLabel('Add Association')
+                                            ->addActionLabel('Add Category & Location Link')
+                                            ->reorderableWithButtons()
+                                            ->collapsible()
+                                            ->collapseAllAction(
+                                                fn (Forms\Components\Actions\Action $action) => $action->label('Collapse All')
+                                            )
+                                            ->reorderable(false),
+                                    ]),
+                            ]),
+
+                        Tab::make('Amenities')
+                            ->schema([
+                                Section::make('Amenity Associations')
+                                    ->description('Link this accommodation to various amenities')
+                                    ->schema([
+                                        Repeater::make('amenityLinks')
+                                            ->relationship('roomLinks', function ($query) {
+                                                return $query->whereNotNull('amenity_id');
+                                            })
+                                            ->schema([
+                                                Select::make('amenity_id')
+                                                    ->label('Amenity')
+                                                    ->options(function () {
+                                                        return Amenity::all()->pluck('name', 'id');
+                                                    })
+                                                    ->searchable()
+                                                    ->preload()
+                                                    ->required()
+                                                    ->helperText('Select an amenity for this accommodation'),
+
+                                                Hidden::make('room_id')
+                                                    ->default(function (callable $get, ?Model $record) {
+                                                        return $record ? $record->id : null;
+                                                    }),
+
+                                                Hidden::make('category_id')
+                                                    ->default(function (callable $get, ?Model $record, ?array $state) {
+                                                        return $state['category_id'] ?? Category::first()->id ?? null;
+                                                    }),
+
+                                                Hidden::make('location_id')
+                                                    ->default(function (callable $get, ?Model $record, ?array $state) {
+                                                        return $state['location_id'] ?? Location::first()->id ?? null;
+                                                    }),
+                                            ])
+                                            ->columns(1)
+                                            ->itemLabel(function (array $state): ?string {
+                                                return Amenity::find($state['amenity_id'])->name ?? '(No amenity)';
+                                            })
+                                            ->addActionLabel('Add Amenity Link')
+                                            ->reorderableWithButtons()
+                                            ->collapsible()
+                                            ->collapseAllAction(
+                                                fn (Forms\Components\Actions\Action $action) => $action->label('Collapse All')
+                                            )
+                                            ->reorderable(false),
+                                    ]),
+                            ]),
+
+                        Tab::make('Activities')
+                            ->schema([
+                                Section::make('Activity Associations')
+                                    ->description('Link this accommodation to various activities')
+                                    ->schema([
+                                        Repeater::make('activityLinks')
+                                            ->relationship('roomLinks', function ($query) {
+                                                return $query->whereNotNull('activity_id');
+                                            })
+                                            ->schema([
+                                                Select::make('activity_id')
+                                                    ->label('Activity')
+                                                    ->options(function () {
+                                                        return Activity::all()->pluck('name', 'id');
+                                                    })
+                                                    ->searchable()
+                                                    ->preload()
+                                                    ->required()
+                                                    ->helperText('Select an activity for this accommodation'),
+
+                                                Hidden::make('room_id')
+                                                    ->default(function (callable $get, ?Model $record) {
+                                                        return $record ? $record->id : null;
+                                                    }),
+
+                                                Hidden::make('category_id')
+                                                    ->default(function (callable $get, ?Model $record, ?array $state) {
+                                                        return $state['category_id'] ?? Category::first()->id ?? null;
+                                                    }),
+
+                                                Hidden::make('location_id')
+                                                    ->default(function (callable $get, ?Model $record, ?array $state) {
+                                                        return $state['location_id'] ?? Location::first()->id ?? null;
+                                                    }),
+                                            ])
+                                            ->columns(1)
+                                            ->itemLabel(function (array $state): ?string {
+                                                return Activity::find($state['activity_id'])->name ?? '(No activity)';
+                                            })
+                                            ->addActionLabel('Add Activity Link')
+                                            ->reorderableWithButtons()
+                                            ->collapsible()
+                                            ->collapseAllAction(
+                                                fn (Forms\Components\Actions\Action $action) => $action->label('Collapse All')
+                                            )
+                                            ->reorderable(false),
+                                    ]),
+                            ]),
+
+                        Tab::make('Features')
+                            ->schema([
+                                Section::make('Feature Associations')
+                                    ->description('Link this accommodation to various features')
+                                    ->schema([
+                                        Repeater::make('featureLinks')
+                                            ->relationship('roomLinks', function ($query) {
+                                                return $query->whereNotNull('feature_id');
+                                            })
+                                            ->schema([
+                                                Select::make('feature_id')
+                                                    ->label('Feature')
+                                                    ->options(function () {
+                                                        return Feature::all()->pluck('name', 'id');
+                                                    })
+                                                    ->searchable()
+                                                    ->preload()
+                                                    ->required()
+                                                    ->helperText('Select a feature for this accommodation'),
+
+                                                Hidden::make('room_id')
+                                                    ->default(function (callable $get, ?Model $record) {
+                                                        return $record ? $record->id : null;
+                                                    }),
+
+                                                Hidden::make('category_id')
+                                                    ->default(function (callable $get, ?Model $record, ?array $state) {
+                                                        return $state['category_id'] ?? Category::first()->id ?? null;
+                                                    }),
+
+                                                Hidden::make('location_id')
+                                                    ->default(function (callable $get, ?Model $record, ?array $state) {
+                                                        return $state['location_id'] ?? Location::first()->id ?? null;
+                                                    }),
+                                            ])
+                                            ->columns(1)
+                                            ->itemLabel(function (array $state): ?string {
+                                                return Feature::find($state['feature_id'])->name ?? '(No feature)';
+                                            })
+                                            ->addActionLabel('Add Feature Link')
                                             ->reorderableWithButtons()
                                             ->collapsible()
                                             ->collapseAllAction(
@@ -231,10 +381,26 @@ class RoomResource extends Resource
                     ->toggleable(),
 
                 TextColumn::make('roomLinks.count')
-                    ->label('Links')
+                    ->label('Total Links')
                     ->badge()
                     ->color('success')
                     ->counts('roomLinks'),
+
+                TextColumn::make('categories_count')
+                    ->label('Categories')
+                    ->badge()
+                    ->color('primary')
+                    ->getStateUsing(function (Room $record): int {
+                        return $record->getCategories()->count();
+                    }),
+
+                TextColumn::make('locations_count')
+                    ->label('Locations')
+                    ->badge()
+                    ->color('warning')
+                    ->getStateUsing(function (Room $record): int {
+                        return $record->getLocations()->count();
+                    }),
 
                 TextColumn::make('updated_at')
                     ->label('Last Updated')
@@ -257,26 +423,70 @@ class RoomResource extends Resource
 
                 Tables\Filters\SelectFilter::make('category')
                     ->label('By Category')
+                    ->multiple()
                     ->options(function () {
                         return Category::all()->pluck('name', 'id');
                     })
                     ->query(function ($query, $data) {
-                        if (!empty($data['value'])) {
+                        if (!empty($data['values'])) {
                             $query->whereHas('roomLinks', function ($q) use ($data) {
-                                $q->where('category_id', $data['value']);
+                                $q->whereIn('category_id', $data['values']);
                             });
                         }
                     }),
 
                 Tables\Filters\SelectFilter::make('location')
                     ->label('By Location')
+                    ->multiple()
                     ->options(function () {
                         return Location::all()->pluck('name', 'id');
                     })
                     ->query(function ($query, $data) {
-                        if (!empty($data['value'])) {
+                        if (!empty($data['values'])) {
                             $query->whereHas('roomLinks', function ($q) use ($data) {
-                                $q->where('location_id', $data['value']);
+                                $q->whereIn('location_id', $data['values']);
+                            });
+                        }
+                    }),
+
+                Tables\Filters\SelectFilter::make('amenity')
+                    ->label('By Amenity')
+                    ->multiple()
+                    ->options(function () {
+                        return Amenity::all()->pluck('name', 'id');
+                    })
+                    ->query(function ($query, $data) {
+                        if (!empty($data['values'])) {
+                            $query->whereHas('roomLinks', function ($q) use ($data) {
+                                $q->whereIn('amenity_id', $data['values']);
+                            });
+                        }
+                    }),
+
+                Tables\Filters\SelectFilter::make('activity')
+                    ->label('By Activity')
+                    ->multiple()
+                    ->options(function () {
+                        return Activity::all()->pluck('name', 'id');
+                    })
+                    ->query(function ($query, $data) {
+                        if (!empty($data['values'])) {
+                            $query->whereHas('roomLinks', function ($q) use ($data) {
+                                $q->whereIn('activity_id', $data['values']);
+                            });
+                        }
+                    }),
+
+                Tables\Filters\SelectFilter::make('feature')
+                    ->label('By Feature')
+                    ->multiple()
+                    ->options(function () {
+                        return Feature::all()->pluck('name', 'id');
+                    })
+                    ->query(function ($query, $data) {
+                        if (!empty($data['values'])) {
+                            $query->whereHas('roomLinks', function ($q) use ($data) {
+                                $q->whereIn('feature_id', $data['values']);
                             });
                         }
                     }),
