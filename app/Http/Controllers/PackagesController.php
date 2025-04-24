@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\Package;
 use App\Models\Category;
 use Illuminate\Http\Request;
