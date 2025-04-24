@@ -22,7 +22,7 @@
                 @php
                     $navItems = [
                         ['label' => 'Home', 'path' => '/', 'hasDropdown' => false],
-                        ['label' => 'Stays', 'path' => '/packages', 'hasDropdown' => true],
+                        ['label' => 'Stays', 'path' => '/stays', 'hasDropdown' => true],
                         ['label' => 'Special Holiday Packages', 'path' => '/packages', 'hasDropdown' => true],
                         ['label' => 'Contact', 'path' => '/contact-us', 'hasDropdown' => false]
                     ];

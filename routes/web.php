@@ -14,8 +14,15 @@ Route::get('/packages', function () {
 });
 
 Route::get('/packages/category/{slug}', function ($slug) {
-    // Logic to load category by slug
     return view('packages.category', compact('slug'));
+});
+
+Route::get('/stays', function () {
+    return view('stays.index');
+});
+
+Route::get('/stays/category/{slug}', function ($slug) {
+    return view('stays.category', compact('slug'));
 });
 
 Route::get('/contact-us', function () {
