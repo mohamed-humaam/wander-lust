@@ -118,7 +118,7 @@
                                                 <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">{{ $room->description['short'] }}</p>
                                             @endif
 
-                                            <a href="#"
+                                            <a href="{{ route('stays.room', $room->id) }}"
                                                class="block text-center bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300 mt-3">
                                                 View Details
                                             </a>
@@ -249,7 +249,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Set minimum date to today for check-in and check-out dates
+            // Set the minimum date today for check-in and check-out dates
             const today = new Date().toISOString().split('T')[0];
             const checkInDateInput = document.getElementById('checkInDate');
             const checkOutDateInput = document.getElementById('checkOutDate');
@@ -264,7 +264,7 @@
             tomorrow.setDate(tomorrow.getDate() + 1);
             checkOutDateInput.value = tomorrow.toISOString().split('T')[0];
 
-            // When check-in date changes, ensure check-out date is always after check-in
+            // When the check-in date changes, ensure the check-out date is always after check-in
             checkInDateInput.addEventListener('change', function () {
                 const selectedDate = new Date(this.value);
                 const nextDay = new Date(selectedDate);
@@ -298,7 +298,7 @@
                 const formattedCheckIn = formatDate(checkInDate);
                 const formattedCheckOut = formatDate(checkOutDate);
 
-                // Calculate number of nights
+                // Calculate the number of nights
                 const startDate = new Date(checkInDate);
                 const endDate = new Date(checkOutDate);
                 const nights = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
