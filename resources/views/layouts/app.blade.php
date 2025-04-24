@@ -29,7 +29,7 @@
 @include('components.navigations.navbar')
 
 <!-- Main content -->
-<main class="pt-20">
+<main class="p-0">
     @yield('content')
 </main>
 

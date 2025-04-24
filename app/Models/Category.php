@@ -31,8 +31,8 @@ class Category extends Model
         return $this->hasMany(Package::class);
     }
 
-    public function roomLinks(): BelongsToMany
+    public function roomLinks(): HasMany
     {
-        return $this->belongsToMany(RoomLink::class, 'room_links');
+        return $this->hasMany(RoomLink::class, 'category_id');
     }
 }
