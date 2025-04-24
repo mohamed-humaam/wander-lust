@@ -1,16 +1,17 @@
 @php use App\Models\Category; @endphp
     <!-- navbar.blade.php -->
 <nav
-    class="fixed w-full z-50 py-0 px-6 h-[80px] flex items-center bg-transparent transition-all duration-300 ease-in-out top-0 {{ request()->routeIs('scrolled') ? 'shadow-sm h-[70px] bg-blue-900 backdrop-blur-md' : '' }}">
+    class="fixed w-full z-50 py-0 px-6 h-[80px] flex items-center bg-transparent transition-all duration-300 ease-in-out top-0 {{ request()->routeIs('scrolled') ? 'shadow-sm h-[70px] bg-blue-900' : '' }}">
     <div class="flex items-center justify-between w-full max-w-[1200px] mx-auto h-full">
         <!-- Logo -->
         <div class="z-60 flex items-center justify-center h-full">
             <div class="logo-widget footer-widget">
                 <div class="flex items-center justify-center h-full">
-                    <div
-                        class="mt-4 font-bold text-2xl bg-gradient-to-r from-[#ff5e14] to-[#8b5cf6] bg-clip-text text-transparent flex items-center py-2">
-                        <img src="{{ asset('assets/images/logo/logo.svg') }}" alt="WanderLust" class="h-12">
-                    </div>
+                    <a href="{{ url('/') }}">  <!-- Add this line to wrap the logo -->
+                        <div class="mt-4 font-bold text-2xl bg-gradient-to-r from-[#ff5e14] to-[#8b5cf6] bg-clip-text text-transparent flex items-center py-2">
+                            <img src="{{ asset('assets/images/logo/logo.svg') }}" alt="WanderLust" class="h-12">
+                        </div>
+                    </a>  <!-- Close the anchor tag -->
                 </div>
             </div>
         </div>
@@ -307,9 +308,13 @@
         function handleScroll() {
             const navbar = document.querySelector('nav');
             if (window.scrollY > 50) {
-                navbar.classList.add('shadow-sm', 'h-[70px]', 'bg-blue-900', 'backdrop-blur-md');
+                // When scrolled down, apply dark blue background
+                navbar.classList.remove('bg-transparent');
+                navbar.classList.add('shadow-sm', 'h-[70px]', 'bg-blue-950');
             } else {
-                navbar.classList.remove('shadow-sm', 'h-[70px]', 'bg-blue-900', 'backdrop-blur-md');
+                // When at top, use transparent background
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('shadow-sm', 'h-[70px]', 'bg-blue-950');
             }
         }
 

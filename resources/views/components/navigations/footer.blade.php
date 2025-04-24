@@ -414,6 +414,7 @@
         color: var(--text-light);
         margin-bottom: 20px;
         line-height: 1.6;
+        padding-left: 30px;
     }
 
     .contact-widget p i {
@@ -422,6 +423,7 @@
         top: 5px;
         color: var(--primary-color);
         font-size: 18px;
+        margin-right: 12px;
     }
 
     .contact-widget p a {
