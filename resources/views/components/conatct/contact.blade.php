@@ -80,7 +80,7 @@
                 </div>
                 <h3 class="text-xl font-semibold text-center mb-3">Call Us</h3>
                 <p class="text-center mb-1">(+960) 726-3030</p>
-                <p class="text-sm text-gray-500 text-center">Saturday-Thursday (8 AM - 5 PM)</p>
+                <p class="text-sm text-gray-500 text-center">24 Hours</p>
             </div>
 
             <!-- Email Us Card -->
