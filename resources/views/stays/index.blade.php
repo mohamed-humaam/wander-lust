@@ -94,7 +94,7 @@
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     @foreach($locations->take(6) as $location)
-                        <x-location-card :location="$location"/>
+                        <x-stays.location-card :location="$location"/>
                     @endforeach
                 </div>
             @endif

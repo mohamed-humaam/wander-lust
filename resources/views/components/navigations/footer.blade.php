@@ -9,7 +9,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                     <div class="logo-widget footer-widget">
                         <div class="logo-container">
-                            <img src="{{ asset('assets/images/logo/logo.svg') }}" alt="WanderLust" class="h-20">
+                            <a href="/">
+                                <img src="{{ asset('assets/images/logo/logo.svg') }}" alt="WanderLust" class="h-20">
+                            </a>
                         </div>
                         <div class="text">
                             <p>Wanderlust Adventures, based in Addu, offers personalized inbound and outbound travel
@@ -17,10 +19,9 @@
                                 destinations, turning your wanderlust into lasting memories.</p>
                         </div>
                         <ul class="footer-social">
-                            <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#" aria-label="Vimeo"><i class="fab fa-vimeo-v"></i></a></li>
-                            <li><a href="#" aria-label="Google Plus"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li><a href="https://www.facebook.com/profile.php?id=61551574229893" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="https://www.instagram.com/_wanderlust.adventuresmv_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="https://www.tiktok.com/@wanderlust.adventu?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +87,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6 col-sm-12 column">
-                <div class="copyright"><a href="#">WanderLust Adventures</a> &copy; {{ date('Y') }} All Rights Reserved
+                <div class="copyright"><a href="/">WanderLust Adventures</a> &copy; {{ date('Y') }} All Rights Reserved
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 column">
