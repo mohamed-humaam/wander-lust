@@ -94,7 +94,7 @@
             @else
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     @foreach($packages as $package)
-                        <x-package-card :package="$package"/>
+                        <x-packages.package-card :package="$package"/>
                     @endforeach
                 </div>
 
