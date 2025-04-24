@@ -7,8 +7,9 @@
         <div class="z-60 flex items-center justify-center h-full">
             <div class="logo-widget footer-widget">
                 <div class="flex items-center justify-center h-full">
-                    <a href="{{ url('/') }}">  <!-- Add this line to wrap the logo -->
-                        <div class="mt-4 font-bold text-2xl bg-gradient-to-r from-[#ff5e14] to-[#8b5cf6] bg-clip-text text-transparent flex items-center py-2">
+                    <a href="{{ url('/') }}">
+                        <div
+                            class="mt-4 font-bold text-2xl bg-gradient-to-r from-[#ff5e14] to-[#8b5cf6] bg-clip-text text-transparent flex items-center py-2">
                             <img src="{{ asset('assets/images/logo/logo.svg') }}" alt="WanderLust" class="h-12">
                         </div>
                     </a>  <!-- Close the anchor tag -->
@@ -22,12 +23,13 @@
                 @php
                     $navItems = [
                         ['label' => 'Home', 'path' => '/', 'hasDropdown' => false],
-                        ['label' => 'Stays', 'path' => '/stays', 'hasDropdown' => true],
-                        ['label' => 'Special Holiday Packages', 'path' => '/packages', 'hasDropdown' => true],
-                        ['label' => 'Contact', 'path' => '/contact-us', 'hasDropdown' => false]
+                        ['label' => 'Stays', 'path' => route('stays.index'), 'hasDropdown' => true],
+                        ['label' => 'Special Holiday Packages', 'path' => route('packages.index'), 'hasDropdown' => true],
+                        ['label' => 'Contact', 'path' => route('contact'), 'hasDropdown' => false]
                     ];
                 @endphp
 
+                    <!-- In the desktop menu section -->
                 @foreach ($navItems as $item)
                     <li class="relative">
                         @if (!isset($item['hasDropdown']) || !$item['hasDropdown'])
@@ -63,7 +65,7 @@
 
                                         @foreach($parentCategories as $category)
                                             <div class="dropdown-item-container relative">
-                                                <a href="/packages/category/{{ $category->slug }}"
+                                                <a href="{{ $item['path'] == route('stays.index') ? route('stays.category', $category->slug) : route('packages.category', $category->slug) }}"
                                                    class="dropdown-item flex items-center justify-between py-[10px] px-4 text-gray-800 dark:text-gray-200 no-underline text-sm transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-[#ff5e14]"
                                                    onmouseenter="handleParentHover('{{ $category->id }}')">
                                                     {{ $category->name }}
@@ -89,7 +91,7 @@
                                                     <div id="submenu-{{ $category->id }}"
                                                          class="dropdown-submenu absolute left-full top-0 min-w-[200px] bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-lg shadow-md py-2 opacity-0 invisible translate-x-[10px] transition-all duration-200 ease-in-out z-50">
                                                         @foreach(Category::where('parent_id', $category->id)->get() as $child)
-                                                            <a href="/packages/category/{{ $child->slug }}"
+                                                            <a href="{{ $item['path'] == route('stays.index') ? route('stays.category', $child->slug) : route('packages.category', $child->slug) }}"
                                                                class="dropdown-subitem block py-[10px] px-4 text-gray-800 dark:text-gray-200 no-underline text-sm transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-[#ff5e14]">
                                                                 {{ $child->name }}
                                                             </a>
@@ -123,6 +125,7 @@
          class="fixed top-0 right-0 w-[300px] h-screen bg-white dark:bg-gray-800 z-40 shadow-md overflow-y-auto translate-x-full transition-transform duration-300 ease-in-out">
         <div class="flex flex-col justify-between px-8 pt-[100px] pb-8 h-full">
             <div class="flex flex-col">
+                <!-- In the mobile menu section -->
                 @foreach ($navItems as $index => $item)
                     @if (!isset($item['hasDropdown']) || !$item['hasDropdown'])
                         <a href="{{ $item['path'] }}"
@@ -153,7 +156,7 @@
                                  class="mobile-dropdown-content hidden max-h-0 overflow-hidden transition-all duration-300 ease-out">
                                 @foreach($parentCategories as $category)
                                     <div class="parent-category-container">
-                                        <a href="/packages/category/{{ $category->slug }}"
+                                        <a href="{{ $item['path'] == route('stays.index') ? route('stays.category', $category->slug) : route('packages.category', $category->slug) }}"
                                            class="mobile-dropdown-item text-gray-600 dark:text-gray-300 no-underline py-3 px-4 text-lg border-b border-gray-200 dark:border-gray-700 transition-all duration-300 ease-in-out hover:text-[#ff5e14] relative flex items-center before:content-[''] before:w-2 before:h-2 before:rounded-full before:bg-gray-200 before:mr-3 before:transition-all before:duration-300 before:ease-in-out hover:before:bg-[#ff5e14]">
                                             {{ $category->name }}
                                         </a>
@@ -162,7 +165,7 @@
                                             <div
                                                 class="mobile-child-categories pl-0 ml-4 border-l-2 border-[#ff5e14] mb-2">
                                                 @foreach(Category::where('parent_id', $category->id)->get() as $child)
-                                                    <a href="/packages/category/{{ $child->slug }}"
+                                                    <a href="{{ $item['path'] == route('stays.index') ? route('stays.category', $child->slug) : route('packages.category', $child->slug) }}"
                                                        class="mobile-dropdown-item child text-base py-[10px] px-4 text-gray-700 dark:text-gray-300 relative opacity-80 border-b-0 hover:opacity-100 hover:bg-[rgba(255,94,20,0.05)]">
                                                         {{ $child->name }}
                                                     </a>

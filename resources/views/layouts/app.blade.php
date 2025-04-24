@@ -26,12 +26,14 @@
 </head>
 <body>
 <!-- Include the navbar component -->
-@include('components.navbar')
+@include('components.navigations.navbar')
 
 <!-- Main content -->
 <main class="pt-20">
     @yield('content')
 </main>
+
+@include('components.navigations.footer')
 
 <!-- Scripts -->
 <script>
