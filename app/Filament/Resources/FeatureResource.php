@@ -64,6 +64,7 @@ class FeatureResource extends Resource
                     ->schema([
                         FileUpload::make('icon')
                             ->image()
+                            ->required()
                             ->directory('icons')
                             ->helperText('Upload a square icon (recommended size: 128×128px)')
                             ->imageCropAspectRatio('1:1')
